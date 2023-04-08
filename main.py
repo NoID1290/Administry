@@ -9,13 +9,13 @@ import win32api
 import win32con
 import platform
 import svctaskk
+import version
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
-# FILEINFO
-version = "0.29.2"
+# FileVer-Check
+ver = f"{version.major}.{version.minor}.{version.build}"
 maintitle = "Administry " #added tab for title space
-author = "NoID1290"
-finalTitle = maintitle + version   
+finalTitle = maintitle + ver  
 
 # MainWindows-Setup
 app = QApplication(sys.argv)
