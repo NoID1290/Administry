@@ -28,9 +28,10 @@ button1.setGeometry(50, 50, 200, 50)
 button1.setEnabled(True)
 button1.clicked.connect(svctaskk.WIN_GUI_KILL)
 
-button2 = QPushButton("Bouton 2", window)
+button2 = QPushButton("Restart Steam", window)
 button2.setGeometry(50, 120, 200, 50)
-button2.setEnabled(False)
+button2.setEnabled(True)
+button2.clicked.connect(svctaskk.STEAM_VALVE_KILL)
 
 button3 = QPushButton("Bouton 3", window)
 button3.setGeometry(50, 190, 200, 50)
