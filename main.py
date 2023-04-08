@@ -12,7 +12,7 @@ import svctaskk
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
 # FILEINFO
-version = "0.29.1"
+version = "0.29.2"
 maintitle = "Administry " #added tab for title space
 author = "NoID1290"
 finalTitle = maintitle + version   
