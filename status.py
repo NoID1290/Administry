@@ -1,31 +1,37 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
+from PyQt5.QtCore import QTimer
 
-class StatusWindow(QDialog):
-    def __init__(self, text):
+class StatusBox(QWidget):
+    def __init__(self):
         super().__init__()
-        self.setWindowTitle("Status Window")
-        self.setFixedSize(300, 100)
         
-        self.label = QLabel(text, self)
-        self.label.setFont(self.label.font().bold())
+        # create label for status text
+        self.status_label = QLabel("Status: Idle")
         
-        self.button = QPushButton("Close", self)
-        self.button.clicked.connect(self.close)
+        # add label to layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.status_label)
+        self.setLayout(layout)
         
-        layout = QVBoxLayout(self)
-        layout.addWidget(self.label)
-        layout.addWidget(self.button)
+        # create timer to update status
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_status)
+        self.timer.start(1000) # update every 1 second
+        
+    def update_status(self):
+        # call your function to get the current status text
+        status_text = get_status_text()
+        self.status_label.setText(f"Status: {status_text}")
 
-    def set_status(self, text):
-        self.label.setText(text)
+def get_status_text():
+    # replace this function with your own function to get the current status text
+    # for this example, we will just return a random number
+    import random
+    return str(random.randint(0, 100))
 
-def main():
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-    status_window = StatusWindow("Task in progress...")
-    status_window.show()
-    status_window.set_status("Task completed.")
-    app.exec_()
-
-if __name__ == "__main__":
-    main()
+    status_box = StatusBox()
+    status_box.show()
+    sys.exit(app.exec_())
