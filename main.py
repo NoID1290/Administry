@@ -17,12 +17,12 @@ maintitle = "Administry " #added tab for title space
 author = "NoID1290"
 finalTitle = maintitle + version   
 
-# Création de la fenêtre principale
+# MainWindows-Setup
 app = QApplication(sys.argv)
 window = QWidget()
 window.setWindowTitle(finalTitle)
 
-# Création des boutons
+# Button-Set
 button1 = QPushButton("Restart Windows GUI", window)
 button1.setGeometry(50, 50, 200, 50)
 button1.setEnabled(True)
@@ -36,10 +36,10 @@ button3 = QPushButton("Bouton 3", window)
 button3.setGeometry(50, 190, 200, 50)
 button3.setEnabled(False)
 
-# Affichage de la fenêtre
+# MainWindows-Rendering
 window.setGeometry(100, 100, 300, 300)
 window.show()
 
-# Démarrage de la boucle principale de l'application
+# START LOOP
 sys.exit(app.exec_())
 
