@@ -7,9 +7,15 @@ import win32con
 
 
 def WIN_GUI_KILL():
-    win32api.MessageBox(0, "Windows Explorer restarting...", "Message", win32con.MB_OK)
-    subprocess.run("taskkill /f /im explorer.exe", shell=True)
-    subprocess.run("start explorer.exe", shell=True)
+    ret = win32api.MessageBox(0, "Restart Windows GUI Service?", "Warning", win32con.MB_OKCANCEL)
+    if ret == win32con.IDOK:
+        subprocess.run("taskkill /f /im explorer.exe", shell=True)
+        subprocess.run("start explorer.exe", shell=True)
+    
+    else:
+        print("Operation cancel by user")
+
+
 
 
 
