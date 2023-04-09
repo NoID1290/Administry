@@ -12,6 +12,7 @@ import svctaskk
 import version
 import status
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QLabel, QStatusBar
+from PyQt5.QtGui import QIcon
 
 # FileVer-Check
 ver = f"{version.major}.{version.minor}.{version.build}"
@@ -22,6 +23,7 @@ finalTitle = maintitle + ver
 app = QApplication(sys.argv)
 window = QWidget()
 window.setWindowTitle(finalTitle)
+window.setWindowIcon(QIcon("administryIco.ico"))
  
 # Button-Set
 button1 = QPushButton("Restart Windows GUI", window)
