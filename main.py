@@ -36,9 +36,10 @@ button2.setGeometry(50, 120, 200, 50)
 button2.setEnabled(True)
 button2.clicked.connect(svctaskk.STEAM_VALVE_KILL)
 
-button3 = QPushButton("Bouton 3", window)
+button3 = QPushButton("Restart Elgato Stream Deck", window)
 button3.setGeometry(50, 190, 200, 50)
-button3.setEnabled(False)
+button3.setEnabled(True)
+button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
 # MainWindows-Rendering
 window.setGeometry(100, 100, 300, 300)

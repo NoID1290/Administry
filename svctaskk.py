@@ -53,7 +53,42 @@ def STEAM_VALVE_KILL():
     elif ret == win32con.IDCANCEL:
         print("Operation cancelled by user.")
         return
+    
+def ELGATO_STREAMDECK_KILL():
+
+    ret = win32api.MessageBox(0, "Restart Elgato Stream Deck?", "Warning", win32con.MB_OKCANCEL)
+    
+    if ret == win32con.IDOK:
+        # checking if Elgato Stream Deck instance is running
+        service_name = "StreamDeck.exe"
+        service_running = False
+        for proc in psutil.process_iter(['name']):
+            if proc.info['name'].lower() == service_name.lower():
+                service_running = True
+                break
+        
+        if service_running:
+            # read value key for Elgato StreamDeck installation path
+            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"SOFTWARE\Elgato Systems GmbH\StreamDeck (Setup)")
+            value = winreg.QueryValueEx(key, "installDir")
+            elgato_value_path = value[0]
+            print("Installation path found!", elgato_value_path)
             
+            subprocess.run("taskkill /f /im StreamDeck.exe", shell=True)
+            print("Killing Steam service...")
+            
+            subprocess.Popen([f"{elgato_value_path}\\StreamDeck.exe"])
+            print("Operation completed!")
+            
+        else:
+            print(f"{service_name} is not running.")
+            win32api.MessageBox(0, "Steam is not running. This tool is intended to use only if Steam is running.", "Warning", win32con.MB_ICONWARNING)
+    
+    elif ret == win32con.IDCANCEL:
+        print("Operation cancelled by user.")
+        return
+
+             
      
 
         
