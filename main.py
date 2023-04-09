@@ -10,7 +10,8 @@ import win32con
 import platform
 import svctaskk
 import version
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+import status
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QLabel, QStatusBar
 
 # FileVer-Check
 ver = f"{version.major}.{version.minor}.{version.build}"
@@ -21,7 +22,7 @@ finalTitle = maintitle + ver
 app = QApplication(sys.argv)
 window = QWidget()
 window.setWindowTitle(finalTitle)
-
+ 
 # Button-Set
 button1 = QPushButton("Restart Windows GUI", window)
 button1.setGeometry(50, 50, 200, 50)
