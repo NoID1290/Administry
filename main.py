@@ -41,8 +41,14 @@ button3.setGeometry(50, 190, 200, 50)
 button3.setEnabled(True)
 button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
+button4 = QPushButton("Video Converter",window)
+button4.setGeometry(50, 260, 200, 50)
+button4.setEnabled(False)
+
+
+
 # MainWindows-Rendering
-window.setGeometry(100, 100, 300, 300)
+window.setGeometry(100, 100, 300, 500)
 window.show()
 
 # START LOOP
