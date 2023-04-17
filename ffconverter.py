@@ -11,8 +11,8 @@ class App(QWidget):
     def __init__(self):
         super().__init__()
         self.title = 'Video Converter'
-        self.left = 10
-        self.top = 10
+        self.left = 250
+        self.top = 250
         self.width = 320
         self.height = 100
         self.initUI()
