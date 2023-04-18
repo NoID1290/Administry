@@ -18,7 +18,9 @@ from PyQt5.QtGui import QIcon
 # FileVer-Check
 ver = f"{version.major}.{version.minor}.{version.build}"
 maintitle = "Administry " #added tab for title space
-finalTitle = maintitle + ver  
+finalTitle = maintitle + ver
+
+app = ffconverter.App()
 
 # MainWindows-Setup
 app = QApplication(sys.argv)
@@ -44,7 +46,8 @@ button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
 button4 = QPushButton("Video Converter",window)
 button4.setGeometry(50, 260, 200, 50)
-button4.setEnabled(False)
+button4.setEnabled(True)
+button4.clicked.connect(app = ffconverter.App)
 
 
 
