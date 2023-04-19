@@ -20,14 +20,18 @@ ver = f"{version.major}.{version.minor}.{version.build}"
 maintitle = "Administry " #added tab for title space
 finalTitle = maintitle + ver
 
-app = ffconverter.App()
 
 # MainWindows-Setup
 app = QApplication(sys.argv)
 window = QWidget()
 window.setWindowTitle(finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
- 
+
+# StatusLabel-Setup
+statusLabel = QLabel("Ready!" , window)
+statusLabel.setGeometry(50, 330, 200, 20)
+
+
 # Button-Set
 button1 = QPushButton("Restart Windows GUI", window)
 button1.setGeometry(50, 50, 200, 50)
@@ -46,14 +50,11 @@ button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
 button4 = QPushButton("Video Converter",window)
 button4.setGeometry(50, 260, 200, 50)
-button4.setEnabled(True)
-button4.clicked.connect(app = ffconverter.App)
-
-
+button4.setEnabled(False)
 
 
 # MainWindows-Rendering
-window.setGeometry(100, 100, 300, 500)
+window.setGeometry(100, 100, 300, 380)
 window.show()
 
 # START LOOP
