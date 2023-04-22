@@ -1,8 +1,6 @@
 ## ADMINISTRY GUI ALPHA ##
 ## by NoID1290 ##
 
-
-
 import sys
 import subprocess
 import win32api
@@ -10,27 +8,20 @@ import win32con
 import platform
 import svctaskk
 import version
-import status
-import ffconverter
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QLabel, QStatusBar
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar
 from PyQt5.QtGui import QIcon
+from ffconverter import STREAM_CONVERTER_FULL
 
 # FileVer-Check
 ver = f"{version.major}.{version.minor}.{version.build}"
 maintitle = "Administry " #added tab for title space
 finalTitle = maintitle + ver
 
-
 # MainWindows-Setup
 app = QApplication(sys.argv)
-window = QWidget()
+window = QMainWindow()
 window.setWindowTitle(finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
-
-# StatusLabel-Setup
-statusLabel = QLabel("Ready!" , window)
-statusLabel.setGeometry(50, 330, 200, 20)
-
 
 # Button-Set
 button1 = QPushButton("Restart Windows GUI", window)
@@ -50,13 +41,23 @@ button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
 button4 = QPushButton("Video Converter",window)
 button4.setGeometry(50, 260, 200, 50)
-button4.setEnabled(False)
+button4.setEnabled(True)
+button4.clicked.connect(STREAM_CONVERTER_FULL)
 
+# Status Bar
+statusBar = QStatusBar()
+window.setStatusBar(statusBar)
 
 # MainWindows-Rendering
 window.setGeometry(100, 100, 300, 380)
 window.show()
 
+# Function to update status bar
+def update_status_bar(message):
+    statusBar.showMessage(message)
+
+# Example usage of update_status_bar()
+update_status_bar("Program started successfully.")
+
 # START LOOP
 sys.exit(app.exec_())
-

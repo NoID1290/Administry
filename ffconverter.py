@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFileDia
 from PyQt5.QtGui import QIcon
 import subprocess
 
-def STREAM_CONVERTER_FULL():
+class STREAM_CONVERTER_FULL():
     class App(QWidget):
 
         def __init__(self):

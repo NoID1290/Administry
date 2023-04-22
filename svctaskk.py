@@ -5,6 +5,7 @@ import winreg
 import psutil
 import sys
 import status
+
 from PyQt5.QtWidgets import QApplication,QWidget, QDialog, QLabel, QVBoxLayout, QPushButton
 from PyQt5.QtCore import QTimer
 
