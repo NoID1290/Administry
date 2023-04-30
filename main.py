@@ -44,10 +44,6 @@ button4.setGeometry(50, 260, 200, 50)
 button4.setEnabled(True)
 button4.clicked.connect(STREAM_CONVERTER_FULL)
 
-# Status Bar
-statusBar = QStatusBar()
-window.setStatusBar(statusBar)
-
 # MainWindows-Rendering
 window.setGeometry(100, 100, 300, 380)
 window.show()
