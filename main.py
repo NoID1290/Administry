@@ -49,7 +49,7 @@ copyright_widget = QWidget()
 copyright_widget_layout = QHBoxLayout()
 copyright_widget.setLayout(copyright_widget_layout)
 copyright_widget_layout.addWidget(
-    QLabel("© 2023 NoID1290. All rights reserved."))
+    QLabel("© 2021-2023 NoID1290. All rights reserved."))
 
 # Status bar
 status_bar = QStatusBar()
