@@ -41,7 +41,7 @@ button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
 button4 = QPushButton("Video Converter",window)
 button4.setGeometry(50, 260, 200, 50)
-button4.setEnabled(True)
+button4.setEnabled(False)#waiting for completed code!
 button4.clicked.connect(STREAM_CONVERTER_FULL)
 
 # Copyright bar
