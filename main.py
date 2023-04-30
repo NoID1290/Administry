@@ -8,7 +8,7 @@ import win32con
 import platform
 import svctaskk
 import version
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget
 from PyQt5.QtGui import QIcon
 from ffconverter import STREAM_CONVERTER_FULL
 
@@ -43,6 +43,18 @@ button4 = QPushButton("Video Converter",window)
 button4.setGeometry(50, 260, 200, 50)
 button4.setEnabled(True)
 button4.clicked.connect(STREAM_CONVERTER_FULL)
+
+# Copyright bar
+copyright_widget = QWidget()
+copyright_widget_layout = QHBoxLayout()
+copyright_widget.setLayout(copyright_widget_layout)
+copyright_widget_layout.addWidget(
+    QLabel("© 2023 NoID1290. All rights reserved."))
+
+# Status bar
+status_bar = QStatusBar()
+status_bar.addWidget(copyright_widget)
+window.setStatusBar(status_bar)
 
 # MainWindows-Rendering
 window.setGeometry(100, 100, 300, 380)
