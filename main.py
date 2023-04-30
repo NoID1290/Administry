@@ -52,12 +52,5 @@ window.setStatusBar(statusBar)
 window.setGeometry(100, 100, 300, 380)
 window.show()
 
-# Function to update status bar
-def update_status_bar(message):
-    statusBar.showMessage(message)
-
-# Example usage of update_status_bar()
-update_status_bar("Program started successfully.")
-
 # START LOOP
 sys.exit(app.exec_())

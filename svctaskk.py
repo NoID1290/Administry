@@ -4,10 +4,12 @@ import win32con
 import winreg
 import psutil
 import sys
-import status
 
-from PyQt5.QtWidgets import QApplication,QWidget, QDialog, QLabel, QVBoxLayout, QPushButton
+
+from PyQt5.QtWidgets import QApplication,QWidget, QDialog, QLabel, QVBoxLayout, QPushButton, QStatusBar, QTextEdit
 from PyQt5.QtCore import QTimer
+
+
 
 
 
@@ -15,6 +17,7 @@ from PyQt5.QtCore import QTimer
 
 def WIN_GUI_KILL():
     
+    print("Waiting for user input...")
     ret = win32api.MessageBox(0, "Restart Windows GUI Service?", "Warning", win32con.MB_OKCANCEL)
     
     if ret == win32con.IDOK:
@@ -92,7 +95,7 @@ def ELGATO_STREAMDECK_KILL():
         print("Operation cancelled by user.")
         return
 
-             
+
      
 
         
