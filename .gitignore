@@ -5,3 +5,4 @@ __pycache__/version.cpython-311.pyc
 module/bin/ffmpeg.exe
 __pycache__/ffconverter.cpython-311.pyc
 
+.vscode/settings.json
