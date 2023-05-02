@@ -55,6 +55,10 @@ button4.setGeometry(50, 260, 200, 50)
 button4.setEnabled(True)#waiting for completed code!
 button4.clicked.connect(runningVconverter)
 
+button5 = QPushButton("Cipher Password Generator",window)
+button5.setGeometry(300,50,200,50)
+button5.setEnabled(False)
+
 
 # Copyright bar
 copyright_widget = QWidget()
@@ -70,7 +74,7 @@ status_bar.addWidget(copyright_widget)
 window.setStatusBar(status_bar)
 
 # MainWindows-Rendering
-window.setGeometry(100, 100, 300, 380)
+window.setGeometry(100, 100, 550, 380)
 window.show()
  
 

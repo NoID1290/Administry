@@ -16,7 +16,7 @@ CHAR = {
 
 
     # Read input from file
-with open('scripts/userInputPending.noid', 'r') as f:
+with open('module/AlgoCI/userInputPending.noid', 'r') as f:
         user_input = f.readline().strip()
 
     # Encrypt the input using the substitution cipher
@@ -25,7 +25,7 @@ for char in user_input:
         encrypted_output += CHAR.get(char.lower(), char)
 
     # Write encrypted output to file
-with open('scripts/encryptResult.noid', 'w') as f:
+with open('module/AlgoCI/encryptResult.noid', 'w') as f:
         f.write(encrypted_output)
 
 print('Encryption completed!')
