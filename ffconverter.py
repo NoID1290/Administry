@@ -69,6 +69,7 @@ class STREAM_CONVERTER_FULL():
 
             print("File converted successfully!")
 
-    #Instance
+    #showWindows
     vConverterApp_window = vConverterApp()
     vConverterApp_window.exec()
+  
