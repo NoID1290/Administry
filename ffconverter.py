@@ -1,11 +1,11 @@
 import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFileDialog, QInputDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFileDialog, QInputDialog, QDialog
 from PyQt5.QtGui import QIcon
 import subprocess
 
-def STREAM_CONVERTER_FULL():
-    class App(QWidget):
+class STREAM_CONVERTER_FULL():
+    class vConverterApp(QDialog):
         print("Video converter started module")
 
         def __init__(self):
@@ -69,7 +69,6 @@ def STREAM_CONVERTER_FULL():
 
             print("File converted successfully!")
 
-    if __name__ == '__main__':
-        app = QApplication(sys.argv)
-        ex = App()
-        sys.exit(app.exec_())
+    #Instance
+    vConverterApp_window = vConverterApp()
+    vConverterApp_window.exec()
