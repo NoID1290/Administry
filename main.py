@@ -8,8 +8,10 @@ import win32con
 import platform
 import svctaskk
 import version
+import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog
 from PyQt5.QtGui import QIcon
+
 
 
 # FileVer-Check
@@ -29,7 +31,11 @@ window.setWindowIcon(QIcon("administryIco.ico"))
 def runningVconverter():
     print("Starting video converter...")
     import ffconverter
-    converter = ffconverter.STREAM_CONVERTER_FULL()
+    sys.exit()
+
+    
+    
+    
 
 
 # Button-Set
@@ -71,7 +77,6 @@ window.setStatusBar(status_bar)
 window.setGeometry(100, 100, 300, 380)
 window.show()
  
-
 
 # START LOOP
 sys.exit(app.exec_())
