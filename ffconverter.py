@@ -35,7 +35,7 @@ class STREAM_CONVERTER_FULL():
         def openFile(self):
             options = QFileDialog.Options()
             options |= QFileDialog.DontUseNativeDialog
-            fileName, _ = QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()","","Video Files (*.mp4 *.avi *.mov)", options=options)
+            fileName, _ = QFileDialog.getOpenFileName(self,"Select a video file to convert","","Video Files (*.mp4 *.avi *.mov)", options=options)
             if fileName:
                 self.convertFile(fileName)
 

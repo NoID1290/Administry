@@ -27,16 +27,12 @@ window.setWindowIcon(QIcon("administryIco.ico"))
      
        
 #FFConverter-Instance
-
 def runningVconverter():
-    print("Starting video converter...")
+    print("Starting video converter..." )
     import ffconverter
-    sys.exit()
-
+    print("Program closed by video converter.")
+    sys.exit() 
     
-    
-    
-
 
 # Button-Set
 button1 = QPushButton("Restart Windows GUI", window)
