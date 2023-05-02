@@ -1,6 +1,6 @@
 #FILE INFO
 major = 0
-minor = 35
-build = 17
+minor = 36
+build = 18
 author = "NoID1290"
 
