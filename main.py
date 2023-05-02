@@ -10,7 +10,7 @@ import svctaskk
 import version
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog
 from PyQt5.QtGui import QIcon
-from ffconverter import STREAM_CONVERTER_FULL
+
 
 # FileVer-Check
 ver = f"{version.major}.{version.minor}.{version.build}"
@@ -22,38 +22,14 @@ app = QApplication(sys.argv)
 window = QMainWindow()
 window.setWindowTitle(finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
-
-class SecondaryWindow(QDialog):
-    def __init__(self):
-        super().__init__()
-        
-        # Set the window title and size
-        self.setWindowTitle('Secondary Window')
-        self.setGeometry(100, 100, 400, 300)
-        
-        # Add a label to the window
-        label = QLabel('This is a secondary window', self)
-        label.move(100, 100)
-
-
+     
+       
+#FFConverter-Instance
 
 def runningVconverter():
     print("Starting video converter...")
     import ffconverter
     converter = ffconverter.STREAM_CONVERTER_FULL()
-    
-    # Create an instance of the secondary window
-    secondary_window = SecondaryWindow()
-    secondary_window.exec_()
-
-
-
-
-
-
-
-
-    
 
 
 # Button-Set
