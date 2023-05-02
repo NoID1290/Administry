@@ -58,8 +58,9 @@ button4.clicked.connect(runningVconverter)
 copyright_widget = QWidget()
 copyright_widget_layout = QHBoxLayout()
 copyright_widget.setLayout(copyright_widget_layout)
-copyright_widget_layout.addWidget(
-    QLabel("© 2021-2023 NoID1290. All rights reserved."))
+build = f"| {version.major}{version.minor}{version.build}"
+copyrighttext = "© 2021-2023 NoID1290. All rights reserved. "
+copyright_widget_layout.addWidget(QLabel(copyrighttext+build))
 
 # Status bar
 status_bar = QStatusBar()
