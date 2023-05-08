@@ -4,9 +4,7 @@ __pycache__/svctaskk.cpython-311.pyc
 __pycache__/version.cpython-311.pyc
 module/bin/ffmpeg.exe
 __pycache__/ffconverter.cpython-311.pyc
-
 .vscode/settings.json
 __pycache__/version.cpython-311.pyc
 module/AlgoCI/encryptResult.noid
-.gitignore
-module/AlgoCI/encryptResult.noid
+module/AlgoCI/decryptResult.noid
