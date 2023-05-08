@@ -1,8 +1,19 @@
 import os
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFileDialog, QInputDialog, QDialog
+from PyQt5.QtGui import QIcon
 
 
+# Create windows prompt
+app = QApplication([])
+password, ok = QInputDialog.getText(None, 'Password', 'Enter your password:')
+if ok:
+    with open('module/AlgoCI/userInputPending.noid', 'w') as f:
+        f.write(password)
+if not ok:
+     app.exit()
 
-def ENCRYPT_INPUTUSER():
+
+class ENCRYPT_INPUTUSER():
 # Define the substitution cipher
     CHAR = {
         'a': 'UDFM45', 'b': 'H21DGF', 'c': 'FDH56D', 'd': 'FGS546', 'e': 'JUK4JH',
