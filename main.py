@@ -11,6 +11,7 @@ import version
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog
 from PyQt5.QtGui import QIcon
+from passAlgoCI import test
 
 
 
@@ -57,7 +58,8 @@ button4.clicked.connect(runningVconverter)
 
 button5 = QPushButton("Cipher Password Generator",window)
 button5.setGeometry(300,50,200,50)
-button5.setEnabled(False)
+button5.setEnabled(True)
+button5.clicked.connect(test)
 
 
 # Copyright bar
