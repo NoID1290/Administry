@@ -1,9 +1,11 @@
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFileDialog, QInputDialog, QDialog
+from PyQt5.QtWidgets import QInputDialog, QDialog
 from PyQt5.QtGui import QIcon
 
 
-def test():
+
+
+def enc0():
     class ENCRYPT_INPUTUSER(QDialog):
         # Create windows prompt
         
@@ -11,12 +13,14 @@ def test():
         if ok:
             with open('module/AlgoCI/userInputPending.noid', 'w') as f:
                 f.write(password)
-        
             
+       
+         # Set the working directory to the script's location
+                script_directory = os.path.dirname(os.path.abspath(__file__))
+                os.chdir(script_directory)         
 
-
-
-    # Define the substitution cipher
+        
+        # Define the substitution cipher
         CHAR = {
             'a': 'UDFM45', 'b': 'H21DGF', 'c': 'FDH56D', 'd': 'FGS546', 'e': 'JUK4JH',
             'f': 'ERG54S', 'g': 'T5H4FD', 'h': 'RG641G', 'i': 'RG4F4D', 'j': 'RT56F6',
@@ -31,17 +35,28 @@ def test():
         }
 
 
-            # Read input from file
+        # Read input from file
         with open('module/AlgoCI/userInputPending.noid', 'r') as f:
                 user_input = f.readline().strip()
 
-            # Encrypt the input using the substitution cipher
+        # Encrypt the input using the substitution cipher
         encrypted_output = ''
         for char in user_input:
                 encrypted_output += CHAR.get(char.lower(), char)
 
-            # Write encrypted output to file
+        # Write encrypted output to file
         with open('module/AlgoCI/encryptResult.noid', 'w') as f:
                 f.write(encrypted_output)
 
         print('Encryption completed!')
+
+        
+        
+def dec0():
+    class DECRYPT_INPUTUSER(QDialog):
+        # Create windows prompt
+        
+        password, ok = QInputDialog.getText(None, 'Password', 'Enter your password:')
+        if ok:
+            with open('module/AlgoCI/userInputPending.noid', 'w') as f:
+                f.write(password)
