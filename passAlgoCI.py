@@ -1,9 +1,29 @@
 import os
-from PyQt5.QtWidgets import QInputDialog, QDialog
+import win32api
+import win32con
+import winreg
+import psutil
+from PyQt5.QtWidgets import QApplication, QInputDialog, QDialog, QLabel
 from PyQt5.QtGui import QIcon
 
 
+# Set the working directory to the script's location
+script_directory = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_directory)
 
+
+class ShowEncryptedOutput(QDialog):
+    def __init__(self, encrypted_output):
+        super().__init__()
+        
+        self.setWindowTitle('Encrypted Output')
+        
+        # Create a QLabel widget to display the encrypted output
+        label = QLabel(self)
+        label.setText(encrypted_output)
+        label.setWordWrap(True)  # Enable word wrapping
+        
+        self.show()
 
 def enc0():
     class ENCRYPT_INPUTUSER(QDialog):
@@ -49,6 +69,17 @@ def enc0():
                 f.write(encrypted_output)
 
         print('Encryption completed!')
+        
+        #Show Encryption
+            # Read encrypted output from file
+        with open('module/AlgoCI/encryptResult.noid', 'r') as f:
+            encrypted_output = f.read()
+            app = QApplication([])
+            dialog = ShowEncryptedOutput(encrypted_output)
+            #app.exec_()
+        
+        # User Prompt saving file encyption
+        SaveENCResult = win32api.MessageBox(0, "Do you want to save the result on your desktop?", "Encryption completed!", win32con.MB_YESNO)
 
         
         
