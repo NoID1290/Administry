@@ -76,7 +76,7 @@ def enc0():
             encrypted_output = f.read()
             app = QApplication([])
             dialog = ShowEncryptedOutput(encrypted_output)
-            #app.exec_()
+            
         
         # User Prompt saving file encyption
         SaveENCResult = win32api.MessageBox(0, "Do you want to save the result on your desktop?", "Encryption completed!", win32con.MB_YESNO)
