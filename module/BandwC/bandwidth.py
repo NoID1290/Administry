@@ -15,8 +15,12 @@ class SpeedTestWorker(QObject):
         self.progress_update.emit('Finding the best server...')
         client.get_best_server()
 
+        # Get the server location
+        server = client.get_best_server()
+        server_name = server['name']
+
         # Perform the speed test
-        self.progress_update.emit('Running speed test...')
+        self.progress_update.emit(f'Running speed test on {server_name}...')
         download_speed = client.download() / 10**6  # Convert to Mbps
         upload_speed = client.upload() / 10**6  # Convert to Mbps
 
