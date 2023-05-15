@@ -1,7 +1,24 @@
 import sys
 import speedtest
+import requests
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, QTimer
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QLabel, QPushButton, QStatusBar
+
+
+
+class IPAddressWorker(QObject):
+    progress_update = pyqtSignal(str)
+    result_ready = pyqtSignal(str)
+
+    def run(self):
+        # Get the user's IP address
+        self.progress_update.emit('Getting the user\'s IP address...')
+        response = requests.get('https://api.ipify.org')
+        self.ip_address = response.text
+
+        # Emit the final results
+        self.result_ready.emit(f'Your IP address is: {self.ip_address}')
+
 
 class SpeedTestWorker(QObject):
     progress_update = pyqtSignal(str)
@@ -42,7 +59,8 @@ class SpeedTestApp(QWidget):
         layout.addWidget(self.label)
         layout.addWidget(self.button)
         self.setLayout(layout)
-
+        
+    
         self.worker = SpeedTestWorker()
         self.thread = QThread()
         self.worker.moveToThread(self.thread)
@@ -73,8 +91,10 @@ class SpeedTestApp(QWidget):
         event.accept()
 
 
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = SpeedTestApp()
     window.show()
+    
     sys.exit(app.exec_())
