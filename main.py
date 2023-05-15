@@ -61,6 +61,11 @@ button5.setGeometry(300,50,200,50)
 button5.setEnabled(True)
 button5.clicked.connect(enc0)
 
+button6 = QPushButton("Speed Test",window)
+button6.setGeometry(300,120,200,50)
+button6.setEnabled(False)#waiting module completed
+#button6.clicked.connect()#waiting module completed
+
 
 # Copyright bar
 copyright_widget = QWidget()
