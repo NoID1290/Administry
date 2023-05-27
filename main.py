@@ -1,6 +1,3 @@
-## ADMINISTRY GUI ALPHA ##
-## by NoID1290 ##
-
 import sys
 import subprocess
 import win32api
@@ -9,7 +6,7 @@ import platform
 import svctaskk
 import version
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog, QToolBar
 from PyQt5.QtGui import QIcon
 from passAlgoCI import enc0
 
@@ -83,7 +80,14 @@ window.setStatusBar(status_bar)
 # MainWindows-Rendering
 window.setGeometry(100, 100, 550, 380)
 window.show()
- 
+
+
+# Add a toolbar to the window
+toolbar = QToolBar()
+toolbar.setMovable(False)
+toolbar.addAction("Option")
+toolbar.addAction("Help")
+window.addToolBar(toolbar)
 
 # START LOOP
 sys.exit(app.exec_())
