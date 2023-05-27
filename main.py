@@ -85,8 +85,9 @@ window.show()
 # Add a toolbar to the window
 toolbar = QToolBar()
 toolbar.setMovable(False)
-toolbar.addAction("Option")
-toolbar.addAction("Help")
+toolbar.addAction("Options")
+toolbar.addAction("Help?")
+toolbar.addAction("About")
 window.addToolBar(toolbar)
 
 # START LOOP
