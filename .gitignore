@@ -8,3 +8,4 @@ __pycache__/ffconverter.cpython-311.pyc
 __pycache__/version.cpython-311.pyc
 module/AlgoCI/encryptResult.noid
 module/AlgoCI/decryptResult.noid
+bin/ffmpeg.exe
