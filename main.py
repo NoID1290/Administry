@@ -4,7 +4,7 @@ import win32api
 import win32con
 import platform
 import svctaskk
-import version
+import buildInfo
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog, QToolBar
 from PyQt5.QtGui import QIcon
@@ -13,7 +13,7 @@ from passAlgoCI import enc0
 
 
 # FileVer-Check
-ver = f"{version.major}.{version.minor}.{version.build}"
+ver = f"{buildInfo.major}.{buildInfo.minor}.{buildInfo.build}"
 maintitle = "Administry " #added tab for title space
 finalTitle = maintitle + ver
 
@@ -50,7 +50,7 @@ button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
 button4 = QPushButton("Video Converter",window)
 button4.setGeometry(50, 260, 200, 50)
-button4.setEnabled(True)#waiting for completed code!
+button4.setEnabled(True) #waiting for completed code!
 button4.clicked.connect(runningVconverter)
 
 button5 = QPushButton("Cipher Password Generator",window)
@@ -68,8 +68,8 @@ button6.setEnabled(False)#waiting module completed
 copyright_widget = QWidget()
 copyright_widget_layout = QHBoxLayout()
 copyright_widget.setLayout(copyright_widget_layout)
-build = f"| {version.major}{version.minor}{version.build}"
-copyrighttext = "© 2021-2023 NoID1290. All rights reserved. "
+build = f"| {buildInfo.major}{buildInfo.minor}{buildInfo.build}"
+copyrighttext = f"| {buildInfo.copyright}"
 copyright_widget_layout.addWidget(QLabel(copyrighttext+build))
 
 # Status bar
