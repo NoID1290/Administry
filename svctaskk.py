@@ -4,6 +4,7 @@ import win32con
 import winreg
 import psutil
 import sys
+import time
 
 
 from PyQt5.QtWidgets import QApplication,QWidget, QDialog, QLabel, QVBoxLayout, QPushButton, QStatusBar, QTextEdit
@@ -83,6 +84,8 @@ def ELGATO_STREAMDECK_KILL():
             
             subprocess.run("taskkill /f /im StreamDeck.exe", shell=True)
             print("Killing Steam service...")
+
+            time.sleep(3)
             
             subprocess.Popen([f"{elgato_value_path}\\StreamDeck.exe"])
             print("Operation completed!")

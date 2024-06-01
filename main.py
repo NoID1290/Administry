@@ -5,6 +5,7 @@ import win32con
 import platform
 import svctaskk
 import buildInfo
+#from ffconverter import STREAM_CONVERTER_FULL
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog, QToolBar
 from PyQt5.QtGui import QIcon
@@ -29,7 +30,7 @@ def runningVconverter():
     print("Starting video converter..." )
     import ffconverter
     print("Program closed by video converter.")
-    sys.exit() 
+    #sys.exit() 
     
 
 # Button-Set
