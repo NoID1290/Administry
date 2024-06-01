@@ -83,16 +83,18 @@ def ELGATO_STREAMDECK_KILL():
             print("Installation path found!", elgato_value_path)
             
             subprocess.run("taskkill /f /im StreamDeck.exe", shell=True)
-            print("Killing Steam service...")
+            print("Killing Elgato Stream Deck service...")
 
+            print("Waiting to Elgato shutting down...")
             time.sleep(3)
+            
             
             subprocess.Popen([f"{elgato_value_path}\\StreamDeck.exe"])
             print("Operation completed!")
             
         else:
             print(f"{service_name} is not running.")
-            win32api.MessageBox(0, "Steam is not running. This tool is intended to use only if Steam is running.", "Warning", win32con.MB_ICONWARNING)
+            win32api.MessageBox(0, "Elgato Stream Deck is not running. This tool is intended to use only if the application is running.", "Warning", win32con.MB_ICONWARNING)
     
     elif ret == win32con.IDCANCEL:
         print("Operation cancelled by user.")
