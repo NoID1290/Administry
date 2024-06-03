@@ -1,7 +1,7 @@
 import sys
 import pyaudio
 import wave
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QComboBox
 
 class RecorderWindow(QMainWindow):
     def __init__(self):
@@ -20,24 +20,41 @@ class RecorderWindow(QMainWindow):
         # Initialize PyAudio object
         self.audio = pyaudio.PyAudio()
 
+        # Create combo box for input device selection
+        self.deviceComboBox = QComboBox(self)
+        self.deviceComboBox.setGeometry(100, 50, 200, 30)
+        self.list_input_devices()
+
         # Create "Record" button
         self.recordBtn = QPushButton("Record", self)
         self.recordBtn.setGeometry(100, 100, 100, 30)
         self.recordBtn.clicked.connect(self.record)
 
         # Create label for status messages
-        self.statusLabel = QLabel("Click 'Record' to begin recording.", self)
-        self.statusLabel.setGeometry(100, 150, 200, 30)
+        self.statusLabel = QLabel("Select input device and click 'Record' to begin recording.", self)
+        self.statusLabel.setGeometry(100, 150, 300, 30)
 
         # Set window parameters
         self.setGeometry(300, 300, 400, 300)
         self.setWindowTitle("Audio Recorder")
 
+    def list_input_devices(self):
+        # Get the list of available input devices
+        device_count = self.audio.get_device_count()
+        for i in range(device_count):
+            device_info = self.audio.get_device_info_by_index(i)
+            if device_info['maxInputChannels'] > 0:
+                self.deviceComboBox.addItem(device_info['name'], i)
+
     def record(self):
+        # Get selected input device index
+        selected_device_index = self.deviceComboBox.currentData()
+
         # Open stream for recording
         self.stream = self.audio.open(format=self.FORMAT, channels=self.CHANNELS,
-                                       rate=self.RATE, input=True,
-                                       frames_per_buffer=self.CHUNK)
+                                      rate=self.RATE, input=True,
+                                      input_device_index=selected_device_index,
+                                      frames_per_buffer=self.CHUNK)
 
         # Update status message
         self.statusLabel.setText("Recording...")
