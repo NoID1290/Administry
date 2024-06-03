@@ -64,6 +64,11 @@ button6.setGeometry(300,120,200,50)
 button6.setEnabled(False)#waiting module completed
 #button6.clicked.connect()#waiting module completed
 
+audioRecording_btn = QPushButton("Audio Recording",window)
+audioRecording_btn.setGeometry(300,190,200,50)
+audioRecording_btn.setEnabled(False)
+#audioRecording_btn.clicked.connect() #waiting module completed
+
 
 # Copyright bar
 copyright_widget = QWidget()
