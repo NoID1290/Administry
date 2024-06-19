@@ -1,21 +1,19 @@
 import sys
+import os
+import platform
 import subprocess
 import win32api
 import win32con
-import platform
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QToolBar
+from PyQt5.QtGui import QIcon
 import svctaskk
 import buildInfo
-#from ffconverter import STREAM_CONVERTER_FULL
-import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog, QToolBar, QMenu
-from PyQt5.QtGui import QIcon
 from passAlgoCI import enc0
-
-
+# from ffconverter import STREAM_CONVERTER_FULL  # Uncomment when ffconverter is ready
 
 # FileVer-Check
 ver = f"{buildInfo.major}.{buildInfo.minor}.{buildInfo.build}"
-maintitle = "Administry " #added tab for title space
+maintitle = "Administry "  # added tab for title space
 finalTitle = maintitle + ver
 
 # MainWindows-Setup
@@ -23,21 +21,19 @@ app = QApplication(sys.argv)
 window = QMainWindow()
 window.setWindowTitle(finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
-     
-       
-#FFConverter-Instance
-def runningVconverter():
-    print("Starting video converter..." )
-    import ffconverter
-    print("Program closed by video converter.")
-    #sys.exit() 
 
-#AudioConverter-Instance
+# FFConverter-Instance
+def runningVconverter():
+    print("Starting video converter...")
+    import ffconverter  # Ensure ffconverter is in your PYTHONPATH
+    print("Program closed by video converter.")
+    # sys.exit()
+
+# AudioConverter-Instance
 def runningAudioR():
     print("Starting audio recording module...")
-    import audioRecorder
-    #sys.exit()    
-
+    import audioRecorder  # Ensure audioRecorder is in your PYTHONPATH
+    # sys.exit()
 
 # Button-Set
 svckill_WinGUI_btn = QPushButton("Restart Windows GUI", window)
@@ -55,26 +51,25 @@ svckill_streamdeck_btn.setGeometry(50, 190, 200, 50)
 svckill_streamdeck_btn.setEnabled(True)
 svckill_streamdeck_btn.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
-vConverter_btn = QPushButton("Video Converter",window)
+vConverter_btn = QPushButton("Video Converter", window)
 vConverter_btn.setGeometry(50, 260, 200, 50)
 vConverter_btn.setEnabled(True)
 vConverter_btn.clicked.connect(runningVconverter)
 
-enc0_btn = QPushButton("Cipher Password Generator",window)
-enc0_btn.setGeometry(300,50,200,50)
+enc0_btn = QPushButton("Cipher Password Generator", window)
+enc0_btn.setGeometry(300, 50, 200, 50)
 enc0_btn.setEnabled(True)
 enc0_btn.clicked.connect(enc0)
 
-speedtest_btn = QPushButton("Speed Test",window)
-speedtest_btn.setGeometry(300,120,200,50)
-speedtest_btn.setEnabled(False)#waiting module completed
-#speedtest_btn.clicked.connect()#waiting module completed
+speedtest_btn = QPushButton("Speed Test", window)
+speedtest_btn.setGeometry(300, 120, 200, 50)
+speedtest_btn.setEnabled(False)  # waiting module completed
+# speedtest_btn.clicked.connect()  # waiting module completed
 
-audioRecording_btn = QPushButton("Audio Recording",window)
-audioRecording_btn.setGeometry(300,190,200,50)
+audioRecording_btn = QPushButton("Audio Recording", window)
+audioRecording_btn.setGeometry(300, 190, 200, 50)
 audioRecording_btn.setEnabled(True)
 audioRecording_btn.clicked.connect(runningAudioR)
-
 
 # Copyright bar
 copyright_widget = QWidget()
@@ -82,17 +77,12 @@ copyright_widget_layout = QHBoxLayout()
 copyright_widget.setLayout(copyright_widget_layout)
 build = f"| {buildInfo.major}{buildInfo.minor}{buildInfo.build}"
 copyrighttext = f"| {buildInfo.copyright}"
-copyright_widget_layout.addWidget(QLabel(copyrighttext+build))
+copyright_widget_layout.addWidget(QLabel(copyrighttext + build))
 
 # Status bar
 status_bar = QStatusBar()
 status_bar.addWidget(copyright_widget)
 window.setStatusBar(status_bar)
-
-# MainWindows-Rendering
-window.setGeometry(100, 100, 550, 380)
-window.show()
-
 
 # Add a toolbar to the window
 toolbar = QToolBar()
@@ -102,6 +92,9 @@ toolbar.addAction("Help?")
 toolbar.addAction("About")
 window.addToolBar(toolbar)
 
+# MainWindows-Rendering
+window.setGeometry(100, 100, 550, 380)
+window.show()
 
 # START LOOP
 sys.exit(app.exec_())
