@@ -1,9 +1,9 @@
 import sys
 import pyaudio
 import wave
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QComboBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QComboBox, QDialog
 
-class RecorderWindow(QMainWindow):
+class RecorderWindow(QDialog):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -83,8 +83,13 @@ class RecorderWindow(QMainWindow):
         wf.writeframes(b''.join(self.frames))
         wf.close()
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    recorder = RecorderWindow()
-    recorder.show()
-    sys.exit(app.exec_())
+#if __name__ == '__main__':
+#    app = QApplication(sys.argv)
+#    recorder = RecorderWindow()
+#    recorder.show()
+#    sys.exit(app.exec_())
+
+#show windows
+RecorderWindow_render = RecorderWindow()
+RecorderWindow_render.show()
+

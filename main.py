@@ -7,7 +7,7 @@ import svctaskk
 import buildInfo
 #from ffconverter import STREAM_CONVERTER_FULL
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog, QToolBar
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QDialog, QToolBar, QMenu
 from PyQt5.QtGui import QIcon
 from passAlgoCI import enc0
 
@@ -31,43 +31,49 @@ def runningVconverter():
     import ffconverter
     print("Program closed by video converter.")
     #sys.exit() 
-    
+
+#AudioConverter-Instance
+def runningAudioR():
+    print("Starting audio recording module...")
+    import audioRecorder
+    #sys.exit()    
+
 
 # Button-Set
-button1 = QPushButton("Restart Windows GUI", window)
-button1.setGeometry(50, 50, 200, 50)
-button1.setEnabled(True)
-button1.clicked.connect(svctaskk.WIN_GUI_KILL)
+svckill_WinGUI_btn = QPushButton("Restart Windows GUI", window)
+svckill_WinGUI_btn.setGeometry(50, 50, 200, 50)
+svckill_WinGUI_btn.setEnabled(True)
+svckill_WinGUI_btn.clicked.connect(svctaskk.WIN_GUI_KILL)
 
-button2 = QPushButton("Restart Steam", window)
-button2.setGeometry(50, 120, 200, 50)
-button2.setEnabled(True)
-button2.clicked.connect(svctaskk.STEAM_VALVE_KILL)
+svckill_steam_btn = QPushButton("Restart Steam", window)
+svckill_steam_btn.setGeometry(50, 120, 200, 50)
+svckill_steam_btn.setEnabled(True)
+svckill_steam_btn.clicked.connect(svctaskk.STEAM_VALVE_KILL)
 
-button3 = QPushButton("Restart Elgato Stream Deck", window)
-button3.setGeometry(50, 190, 200, 50)
-button3.setEnabled(True)
-button3.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
+svckill_streamdeck_btn = QPushButton("Restart Elgato Stream Deck", window)
+svckill_streamdeck_btn.setGeometry(50, 190, 200, 50)
+svckill_streamdeck_btn.setEnabled(True)
+svckill_streamdeck_btn.clicked.connect(svctaskk.ELGATO_STREAMDECK_KILL)
 
-button4 = QPushButton("Video Converter",window)
-button4.setGeometry(50, 260, 200, 50)
-button4.setEnabled(True) #waiting for completed code!
-button4.clicked.connect(runningVconverter)
+vConverter_btn = QPushButton("Video Converter",window)
+vConverter_btn.setGeometry(50, 260, 200, 50)
+vConverter_btn.setEnabled(True)
+vConverter_btn.clicked.connect(runningVconverter)
 
-button5 = QPushButton("Cipher Password Generator",window)
-button5.setGeometry(300,50,200,50)
-button5.setEnabled(True)
-button5.clicked.connect(enc0)
+enc0_btn = QPushButton("Cipher Password Generator",window)
+enc0_btn.setGeometry(300,50,200,50)
+enc0_btn.setEnabled(True)
+enc0_btn.clicked.connect(enc0)
 
-button6 = QPushButton("Speed Test",window)
-button6.setGeometry(300,120,200,50)
-button6.setEnabled(False)#waiting module completed
-#button6.clicked.connect()#waiting module completed
+speedtest_btn = QPushButton("Speed Test",window)
+speedtest_btn.setGeometry(300,120,200,50)
+speedtest_btn.setEnabled(False)#waiting module completed
+#speedtest_btn.clicked.connect()#waiting module completed
 
 audioRecording_btn = QPushButton("Audio Recording",window)
 audioRecording_btn.setGeometry(300,190,200,50)
-audioRecording_btn.setEnabled(False)
-#audioRecording_btn.clicked.connect() #waiting module completed
+audioRecording_btn.setEnabled(True)
+audioRecording_btn.clicked.connect(runningAudioR)
 
 
 # Copyright bar
@@ -95,6 +101,7 @@ toolbar.addAction("Options")
 toolbar.addAction("Help?")
 toolbar.addAction("About")
 window.addToolBar(toolbar)
+
 
 # START LOOP
 sys.exit(app.exec_())
