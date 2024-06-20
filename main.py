@@ -30,7 +30,7 @@ def runningVconverter():
     print("Program closed by video converter.")
     # sys.exit()
 
-# AudioConverter-Instance
+# AudioRecorder-Instance
 def runningAudioR():
     print("Starting audio recording module...")
     recorder = RecorderWindow()
