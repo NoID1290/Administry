@@ -68,8 +68,11 @@ class STREAM_CONVERTER_FULL():
                 return
 
             print("File converted successfully!")
+            
 
     #showWindows
     vConverterApp_window = vConverterApp()
     vConverterApp_window.exec()
+
+    
   

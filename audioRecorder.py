@@ -88,8 +88,3 @@ class RecorderWindow(QDialog):
 #    recorder = RecorderWindow()
 #    recorder.show()
 #    sys.exit(app.exec_())
-
-#show windows
-RecorderWindow_render = RecorderWindow()
-RecorderWindow_render.show()
-

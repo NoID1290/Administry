@@ -9,6 +9,7 @@ from PyQt5.QtGui import QIcon
 import svctaskk
 import buildInfo
 from passAlgoCI import enc0
+from audioRecorder import RecorderWindow  # Ensure recorder.py is in the same directory or in PYTHONPATH
 # from ffconverter import STREAM_CONVERTER_FULL  # Uncomment when ffconverter is ready
 
 # FileVer-Check
@@ -32,7 +33,8 @@ def runningVconverter():
 # AudioConverter-Instance
 def runningAudioR():
     print("Starting audio recording module...")
-    import audioRecorder  # Ensure audioRecorder is in your PYTHONPATH
+    recorder = RecorderWindow()
+    recorder.exec_()  # Run the dialog window as modal
     # sys.exit()
 
 # Button-Set
