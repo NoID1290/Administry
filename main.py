@@ -8,19 +8,15 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout,
 from PyQt5.QtGui import QIcon
 import svctaskk
 import buildInfo
+import buildVerCk
 from passAlgoCI import enc0
 from audioRecorder import RecorderWindow  # Ensure recorder.py is in the same directory or in PYTHONPATH
 # from ffconverter import STREAM_CONVERTER_FULL  # Uncomment when ffconverter is ready
 
-# FileVer-Check
-ver = f"{buildInfo.major}.{buildInfo.minor}.{buildInfo.build}"
-maintitle = "Administry "  # added tab for title space
-finalTitle = maintitle + ver
-
 # MainWindows-Setup
 app = QApplication(sys.argv)
 window = QMainWindow()
-window.setWindowTitle(finalTitle)
+window.setWindowTitle(buildVerCk.finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
 
 # FFConverter-Instance
