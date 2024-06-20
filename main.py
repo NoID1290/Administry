@@ -4,11 +4,11 @@ import platform
 import subprocess
 import win32api
 import win32con
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QToolBar
-from PyQt5.QtGui import QIcon
 import svctaskk
 import buildInfo
 import buildVerCk
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel, QStatusBar, QWidget, QToolBar
+from PyQt5.QtGui import QIcon
 from passAlgoCI import enc0
 from audioRecorder import RecorderWindow  # Ensure recorder.py is in the same directory or in PYTHONPATH
 # from ffconverter import STREAM_CONVERTER_FULL  # Uncomment when ffconverter is ready
