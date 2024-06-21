@@ -7,6 +7,7 @@ import win32con
 import svctaskk
 import buildInfo
 import buildVerCk
+import moduleBoot
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar
@@ -22,30 +23,16 @@ window = QMainWindow()
 window.setWindowTitle(buildVerCk.finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
 
-# FFConverter instance
-def runningVconverter():
-    print("Starting video converter...")
-    vRecorderffmpeg = vConverterApp()
-    vRecorderffmpeg.exec_() 
-    print("Video converter closed by user")
-    
-
-# AudioRecorder instance
-def runningAudioR():
-    print("Starting audio recording module...")
-    recorder = RecorderWindow()
-    recorder.exec_()
-    print("Audio recorder closed by user")
 
 # Button setup
 buttons = [
     ("Restart Windows GUI", svctaskk.WIN_GUI_KILL, (50, 50)),
     ("Restart Steam", svctaskk.STEAM_VALVE_KILL, (50, 120)),
     ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 190)),
-    ("Video Converter", runningVconverter, (50, 260)),
+    ("Video Converter", moduleBoot.runningVconverter, (50, 260)),
     ("Cipher Password Generator", enc0, (300, 50)),
     ("Speed Test", None, (300, 120)),
-    ("Audio Recording", runningAudioR, (300, 190)),
+    ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
 ]
 # Text function and position 
 for text, func, pos in buttons:
