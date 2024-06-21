@@ -43,7 +43,7 @@ buttons = [
     ("Speed Test", None, (300, 120)),
     ("Audio Recording", runningAudioR, (300, 190)),
 ]
-# Text function position 
+# Text function and position 
 for text, func, pos in buttons:
     btn = QPushButton(text, window)
     btn.setGeometry(*pos, 200, 50)
