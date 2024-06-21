@@ -22,7 +22,7 @@ class RecorderWindow(QDialog):
 
         # Create combo box for input device selection
         self.deviceComboBox = QComboBox(self)
-        self.deviceComboBox.setGeometry(100, 50, 200, 30)
+        self.deviceComboBox.setGeometry(100, 50, 300, 30)
         self.list_input_devices()
 
         # Create "Record" button
@@ -35,7 +35,7 @@ class RecorderWindow(QDialog):
         self.statusLabel.setGeometry(100, 150, 300, 30)
 
         # Set window parameters
-        self.setGeometry(300, 300, 400, 300)
+        self.setGeometry(300, 300, 600, 300)
         self.setWindowTitle("Audio Recorder")
 
     def list_input_devices(self):
