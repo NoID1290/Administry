@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QFileDia
 from PyQt5.QtGui import QIcon
 import subprocess
 
-class STREAM_CONVERTER_FULL():
-    class vConverterApp(QDialog):
+
+class vConverterApp(QDialog):
         print("Video converter started module")
 
         def __init__(self):
@@ -71,8 +71,8 @@ class STREAM_CONVERTER_FULL():
             
 
     #showWindows
-    vConverterApp_window = vConverterApp()
-    vConverterApp_window.exec()
+    #vConverterApp_window = vConverterApp()
+    #vConverterApp_window.exec()
 
     
   

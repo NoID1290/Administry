@@ -14,6 +14,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QIcon
 from passAlgoCI import enc0
 from audioRecorder import RecorderWindow
+from ffconverter import vConverterApp
 
 # Main window setup
 app = QApplication(sys.argv)
@@ -24,14 +25,17 @@ window.setWindowIcon(QIcon("administryIco.ico"))
 # FFConverter instance
 def runningVconverter():
     print("Starting video converter...")
-    import ffconverter  # Ensure ffconverter is in your PYTHONPATH
-    print("Program closed by video converter.")
+    vRecorderffmpeg = vConverterApp()
+    vRecorderffmpeg.exec_() 
+    print("Video converter closed by user")
+    
 
 # AudioRecorder instance
 def runningAudioR():
     print("Starting audio recording module...")
     recorder = RecorderWindow()
-    recorder.exec_()  # Run the dialog window as modal
+    recorder.exec_()
+    print("Audio recorder closed by user")
 
 # Button setup
 buttons = [
