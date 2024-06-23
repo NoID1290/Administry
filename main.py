@@ -14,8 +14,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QIcon
 from passAlgoCI import enc0
-from audioRecorder import RecorderWindow
-from ffconverter import vConverterApp
+
 
 # Main window setup
 app = QApplication(sys.argv)
