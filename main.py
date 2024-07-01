@@ -37,7 +37,7 @@ buttons = [
 
 for text, func, pos in buttons:
     btn = QPushButton(text, window)
-    btn.setGeometry(*pos, 200, 50)
+    btn.setGeometry(*pos, 200, 50) # All buttons geometry
     btn.setEnabled(func is not None)
     if func:
         btn.clicked.connect(func)
