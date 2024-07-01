@@ -3,6 +3,7 @@ import svctaskk
 import buildInfo
 import buildVerCk
 import moduleBoot
+import pathDir
 
 
 from PyQt5.QtWidgets import (
@@ -21,7 +22,7 @@ from passAlgoCI import enc0
 app = QApplication(sys.argv)
 window = QMainWindow()
 window.setWindowTitle(buildVerCk.finalTitle)
-window.setWindowIcon(QIcon("administryIco.ico"))
+window.setWindowIcon(QIcon(pathDir.adm_ico))
 
 # Button setup
 buttons = [
