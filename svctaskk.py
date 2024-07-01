@@ -10,6 +10,7 @@ import pyuac
 
 from PyQt5.QtWidgets import QApplication,QWidget, QDialog, QLabel, QVBoxLayout, QPushButton, QStatusBar, QTextEdit
 from PyQt5.QtCore import QTimer
+from ckUac import uac
 
 
 
@@ -108,7 +109,7 @@ def ELGATO_STREAMDECK_KILL():
 def HWINFO64_KILL():
 
     # Check for admin privileges
-    if not pyuac.isUserAdmin():
+    if uac == [0]:
         ret = win32api.MessageBox(0, "Administry need to restart with administrator privilege", "Warning", win32con.MB_OKCANCEL)
         if ret == win32con.IDOK:
         # Re-run the script with admin privileges
@@ -116,6 +117,7 @@ def HWINFO64_KILL():
         elif ret == win32con.IDCANCEL:
             print("Operation cancelled by user.")
         return
+    
     
     
     ret = win32api.MessageBox(0, "Restart HWINFO64?", "Warning", win32con.MB_OKCANCEL)
