@@ -28,8 +28,8 @@ buttons = [
     ("Restart Steam", svctaskk.STEAM_VALVE_KILL, (50, 120)),
     ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 190)),
     ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
-    ("Cipher Password Generator", enc0, (300, 50)),
-    ("Speed Test", None, (300, 120)),
+    ("Cipher Password Generator", None, (300, 50)), # waiting for module completed
+    ("Speed Test", None, (300, 120)), # waiting for module completed
     ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
     ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
 ]
