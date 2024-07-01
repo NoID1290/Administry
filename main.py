@@ -1,14 +1,9 @@
 import sys
-import os
-import platform
-import subprocess
-import win32api
-import win32con
 import svctaskk
 import buildInfo
 import buildVerCk
 import moduleBoot
-import pyuac
+
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar

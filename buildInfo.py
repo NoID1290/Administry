@@ -1,7 +1,7 @@
 #BUILD VERSION
 major = 0
 minor = 54
-build = 31
+build = 32
 
 #AUTHOR
 author = "NoID1290"
