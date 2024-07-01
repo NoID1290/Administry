@@ -6,7 +6,7 @@ import subprocess
 
 
 class vConverterApp(QDialog):
-        print("Video converter started module")
+        #print("Video converter started module")
 
         def __init__(self):
             super().__init__()
