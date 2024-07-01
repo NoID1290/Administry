@@ -5,6 +5,7 @@ import winreg
 import psutil
 import sys
 import time
+import pyuac
 
 
 from PyQt5.QtWidgets import QApplication,QWidget, QDialog, QLabel, QVBoxLayout, QPushButton, QStatusBar, QTextEdit
@@ -57,6 +58,7 @@ def STEAM_VALVE_KILL():
         else:
             print(f"{service_name} is not running.")
             win32api.MessageBox(0, "Steam is not running. This tool is intended to use only if Steam is running.", "Warning", win32con.MB_ICONWARNING)
+            return
     
     elif ret == win32con.IDCANCEL:
         print("Operation cancelled by user.")
@@ -95,10 +97,66 @@ def ELGATO_STREAMDECK_KILL():
         else:
             print(f"{service_name} is not running.")
             win32api.MessageBox(0, "Elgato Stream Deck is not running. This tool is intended to use only if the application is running.", "Warning", win32con.MB_ICONWARNING)
+            return
     
     elif ret == win32con.IDCANCEL:
         print("Operation cancelled by user.")
         return
+    
+
+
+def HWINFO64_KILL():
+
+    # Check for admin privileges
+    if not pyuac.isUserAdmin():
+        ret = win32api.MessageBox(0, "Administry need to restart with administrator privilege", "Warning", win32con.MB_OKCANCEL)
+        if ret == win32con.IDOK:
+        # Re-run the script with admin privileges
+                pyuac.runAsAdmin()
+        elif ret == win32con.IDCANCEL:
+            print("Operation cancelled by user.")
+        return
+    
+    
+    ret = win32api.MessageBox(0, "Restart HWINFO64?", "Warning", win32con.MB_OKCANCEL)
+
+    if ret == win32con.IDOK:
+        
+    
+        # looking if hwinfo64 service is running
+        service_name = "HWiNFO64.EXE"
+        service_running = True
+        #for proc in psutil.process_iter(['name']):
+            #if proc.info['name'].lower() == service_name.lower():
+                #service_running = True
+                #break
+                
+        if service_running:
+                #read value in regedit for install path
+                key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\HWiNFO64_is1")
+                value = winreg.QueryValueEx(key, "Inno Setup: App Path")
+                hwinfo64_value_path = value[0]
+                print("Installation path found!", hwinfo64_value_path)
+
+                #killing service
+                subprocess.run("taskkill /f /im HWiNFO64.EXE", shell=True)
+                print("Killing HWINFO64 service...")
+
+                print("Waiting to HWINFO64 shutting down...")
+                time.sleep(3)
+
+                subprocess.Popen([f"{hwinfo64_value_path}\\HWiNFO64.EXE"])
+                print("Operation completed!")
+
+        else:
+                print(f"{service_name} is not running.")
+                win32api.MessageBox(0, "HWINFO64 is not running. This tool is intended to use only if the application is running.", "Warning", win32con.MB_ICONWARNING)
+                return
+     
+    elif ret == win32con.IDCANCEL:
+        print("Operation cancelled by user.")
+        return
+
 
 
      

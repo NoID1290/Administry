@@ -8,12 +8,17 @@ import svctaskk
 import buildInfo
 import buildVerCk
 import moduleBoot
+import pyuac
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar
 )
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt  # Importing Qt for alignment constants
+
 from passAlgoCI import enc0
+
+
 
 
 # Main window setup
@@ -22,18 +27,18 @@ window = QMainWindow()
 window.setWindowTitle(buildVerCk.finalTitle)
 window.setWindowIcon(QIcon("administryIco.ico"))
 
-
 # Button setup
 buttons = [
     ("Restart Windows GUI", svctaskk.WIN_GUI_KILL, (50, 50)),
     ("Restart Steam", svctaskk.STEAM_VALVE_KILL, (50, 120)),
     ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 190)),
-    ("Video Converter", moduleBoot.runningVconverter, (50, 260)),
+    ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
     ("Cipher Password Generator", enc0, (300, 50)),
     ("Speed Test", None, (300, 120)),
     ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
+    ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
 ]
-# Text function and position 
+
 for text, func, pos in buttons:
     btn = QPushButton(text, window)
     btn.setGeometry(*pos, 200, 50)
