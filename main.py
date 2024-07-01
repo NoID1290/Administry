@@ -4,6 +4,7 @@ import buildInfo
 import buildVerCk
 import moduleBoot
 
+
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar

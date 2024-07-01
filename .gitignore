@@ -10,4 +10,7 @@ module/AlgoCI/encryptResult.noid
 module/AlgoCI/decryptResult.noid
 __pycache__/svctaskk.cpython-312.pyc
 __pycache__/buildInfo.cpython-312.pyc
+dist/
+build/
+main.spec
 .gitignore
