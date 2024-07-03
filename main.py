@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt  # Importing Qt for alignment constants
 
-from passAlgoCI import enc0
+#from passAlgoCI import enc0
 
 
 
