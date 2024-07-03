@@ -1,6 +1,6 @@
 #BUILD VERSION
 major = 0
-minor = 56
+minor = 57
 build = 34
 
 #AUTHOR
