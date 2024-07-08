@@ -7,6 +7,7 @@ adm_ASCII = "assets/ascii/asciisplash-100.noid"
 
 #Modules path
 
-ffmpeg_mPath = "modules/bin/ffmpeg.exe"
+ffmpeg_mPath = "modules/bin/"
+ffmpeg_mPathExe = ffmpeg_mPath + "ffmpeg.exe"
 sss_mPath = ""
 sss_mPathExe = ""

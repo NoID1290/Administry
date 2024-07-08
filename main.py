@@ -25,7 +25,7 @@ window.setWindowTitle(buildVerCk.finalTitle)
 window.setWindowIcon(QIcon(pathDir.adm_ico))
 
 # Button setup
-buttons = [
+mainBtn = [
     ("Restart Windows GUI", svctaskk.WIN_GUI_KILL, (50, 50)),
     ("Restart Steam", svctaskk.STEAM_VALVE_KILL, (50, 120)),
     ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 190)),
@@ -36,7 +36,7 @@ buttons = [
     ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
 ]
 
-for text, func, pos in buttons:
+for text, func, pos in mainBtn:
     btn = QPushButton(text, window)
     btn.setGeometry(*pos, 200, 50) # All buttons geometry
     btn.setEnabled(func is not None)
