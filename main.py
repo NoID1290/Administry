@@ -4,7 +4,8 @@ import buildInfo
 import buildVerCk
 import moduleBoot
 import pathDir
-
+import ckHardware
+from ckHardware import GPUname
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
@@ -36,10 +37,12 @@ mainBtn = [
     ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
 ]
 
-for text, func, pos in mainBtn:
+for text, func, pos, in mainBtn:
     btn = QPushButton(text, window)
     btn.setGeometry(*pos, 200, 50) # All buttons geometry
     btn.setEnabled(func is not None)
+    #btn.toolTip(tip, window)
+
     if func:
         btn.clicked.connect(func)
 
@@ -49,7 +52,7 @@ copyright_widget_layout = QHBoxLayout()
 copyright_widget.setLayout(copyright_widget_layout)
 build = f"| {buildInfo.major}{buildInfo.minor}{buildInfo.build}"
 copyrighttext = f"| {buildInfo.copyright}"
-copyright_widget_layout.addWidget(QLabel(copyrighttext + build))
+copyright_widget_layout.addWidget(QLabel(copyrighttext + build + " "+GPUname))
 
 # Status bar
 status_bar = QStatusBar()
@@ -57,10 +60,18 @@ status_bar.addWidget(copyright_widget)
 window.setStatusBar(status_bar)
 
 # Toolbar
+
+
 toolbar = QToolBar()
 toolbar.setMovable(False)
+toolbar.setDisabled(True) #Disable/Enable access to toolbar
+toolbar.setWindowTitle("Hide toolbar")
+toolbar.setToolTip("Need Help?") #Easter Egg
+
+
 for action in ["Options", "Help?", "About"]:
     toolbar.addAction(action)
+    toolbar.scroll
 window.addToolBar(toolbar)
 
 # Main window rendering
