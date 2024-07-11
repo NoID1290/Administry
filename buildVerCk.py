@@ -1,7 +1,17 @@
-import buildInfo
-
 from ckUac import uacUservalue
 
-ver = f"{buildInfo.major}.{buildInfo.minor}.{buildInfo.build}"
+#BUILD VERSION
+major = 0
+minor = 61
+build = 36
+
+#AUTHOR
+author = "NoID1290"
+copyright = "© 2021-2024 NoID1290. All rights reserved. "
+
+
+
+#FORMAT
+ver = f"{major}.{minor}.{build}"
 maintitle = "Administry "  # added tab for title space
 finalTitle = maintitle + ver + uacUservalue

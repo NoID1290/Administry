@@ -1,5 +1,7 @@
 import GPUtil
+import platform
 
+#GPU
 def get_gpu_info():
     gpus = GPUtil.getGPUs()
     if not gpus:
@@ -35,3 +37,14 @@ if gpu_info_list:
     GPUuuid = first_gpu_info['uuid']
 else:
     id_ = name = load = memory_total = memory_used = memory_free = temperature = uuid = None
+
+
+#CPU
+
+def get_cpu_info():
+    cpu_architecture = platform.machine()
+    processor_name = platform.processor()
+    return cpu_architecture, processor_name
+
+  
+
