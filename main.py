@@ -5,6 +5,7 @@ import moduleBoot
 import pathDir
 import ckHardware
 from ckHardware import GPUname, get_cpu_info
+from admtools import btnSelect
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
@@ -21,9 +22,12 @@ class WelcomeScreen(QWidget):
         self.setStyleSheet("background-color: #2E2E2E; color: white;")
         layout = QVBoxLayout()
 
-        self.label = QLabel("Administry"+" "+ buildVerCk.ver, self)
+        self.label = QLabel("Administry", self)
+        self.buildV = QLabel(buildVerCk.ver, self)
         self.label.setAlignment(Qt.AlignCenter)
+        self.buildV.setAlignment(Qt.AlignTop)
         self.label.setStyleSheet("font-size: 24px;")
+        self.buildV.setStyleSheet("font-size: 14px;")
         layout.addWidget(self.label)
         self.setLayout(layout)
 
@@ -40,7 +44,7 @@ class MainWindow(QMainWindow):
             ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 190)),
             ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
             ("Cipher Password Generator", None, (300, 50)), # waiting for module completed
-            ("Speed Test", None, (300, 120)), # waiting for module completed
+            ("Administration Tools", self.admTools, (300, 120)),
             ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
             ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
         ]
@@ -76,6 +80,11 @@ class MainWindow(QMainWindow):
             toolbar.addAction(action)
         self.addToolBar(toolbar)
 
+    # Define Qapp
+    def admTools(self):
+        self.admin_tools_window = btnSelect()
+        self.admin_tools_window.show()
+
 def main():
     app = QApplication(sys.argv)
 
@@ -83,7 +92,7 @@ def main():
     welcome_screen = WelcomeScreen()
     welcome_screen.show()
     
-    # Force the application to process all pending events
+    # Force the application to process all pending events (Loading)
     app.processEvents()
     
     # Time Sleep
@@ -95,7 +104,7 @@ def main():
     main_window.setGeometry(100, 100, 550, 380)
     main_window.show()
     
-    # Close the loading screen
+    # Close the welcome screen
     welcome_screen.close()
 
     sys.exit(app.exec_())
