@@ -1,0 +1,48 @@
+import pathDir
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
+    QStatusBar, QWidget, QToolBar, QVBoxLayout, QDialog
+)
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
+
+
+
+    
+class btnSelect(QWidget):
+    def __init__(self):
+        super().__init__()     
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('Administration Tools')
+        self.setGeometry(300, 300, 600, 300)
+        self.setWindowIcon(QIcon(pathDir.adm_ico))
+
+
+        # Adm Button setup
+        admBtn = [
+            ("LUAGM", None, (50, 50)),
+            ("Windows Features", None, (50, 120)),
+            ("Windows God Mode", None, (50, 190)),
+            ("Refresh graphic driver", None, (300, 190)),
+            ("Refresh audio driver", None, (300, 120)),
+            ("Windows 10/11 switch menu context", None, (300, 50)),
+        ]
+        
+        for text, func, pos in admBtn:
+            btn = QPushButton(text, self)
+            btn.setGeometry(*pos, 200, 50) # All buttons geometry
+            btn.setEnabled(func is not None)
+            if func:
+                btn.clicked.connect(func)
+
+
+
+
+
+        
+
+
+        self.show
+        

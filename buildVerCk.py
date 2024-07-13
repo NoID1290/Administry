@@ -2,7 +2,7 @@ from ckUac import uacUservalue
 
 #BUILD VERSION
 major = 0
-minor = 61
+minor = 62
 build = 37
 
 #AUTHOR

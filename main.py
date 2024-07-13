@@ -5,7 +5,7 @@ import moduleBoot
 import pathDir
 import ckHardware
 from ckHardware import GPUname, get_cpu_info
-from admtools import btnSelect
+from admtoolsW import btnSelect
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
