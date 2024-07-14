@@ -17,7 +17,7 @@ class btnSelect(QWidget):
 
     def initUI(self):
         self.setWindowTitle('Administration Tools')
-        self.setGeometry(300, 300, 600, 300)
+        self.setGeometry(100, 100, 550, 380)
         self.setWindowIcon(QIcon(pathDir.adm_ico))
         self.setFixedSize(self.size()) # Disable resize & maximize
 
@@ -27,6 +27,7 @@ class btnSelect(QWidget):
             ("LUAGM",admtools.luagm_access, (50, 50)),
             ("Windows Features", admtools.winFeatures_access, (50, 120)),
             ("Windows God Mode", admtools.winGodMod_access, (50, 190)),
+            ("Startup Folder", admtools.startupFolder_access, (50, 260)),
             ("Refresh graphic driver", None, (300, 190)),
             ("Refresh audio driver", None, (300, 120)),
             ("Windows 10/11 switch menu context", None, (300, 50)),

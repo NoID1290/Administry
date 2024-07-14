@@ -22,7 +22,14 @@ def winGodMod_access(): # Windows God Mode Control Panel
         os.system("explorer.exe shell:::{ED7BA470-8E54-465E-825C-99712043E01C}")          
         print("Open God Mode")
     except Exception as e:
-        print(f"An error occurred: {e}") 
+        print(f"An error occurred: {e}")
+
+def startupFolder_access():
+    try:
+        os.system("explorer.exe shell:startup")
+        print("Open Startup folder")
+    except Exception as e:
+        print(f"An error occurred: {e}")             
 
 
 
