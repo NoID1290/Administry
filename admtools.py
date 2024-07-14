@@ -1,37 +1,23 @@
 import os
 
-
-#Accessing Windows Tools
-
-def luagm_access(): # Local Users and Groups management
+def execute_command(command, success_message):
     try:
-        os.system("lusrmgr.msc")
-        print("Local Users and Groups management console opened successfully.")
+        os.system(command)
+        print(success_message)
     except Exception as e:
         print(f"An error occurred: {e}")
 
-def winFeatures_access(): # Windows Features 
-    try:
-        os.system("optionalfeatures")     
-        print("Windows features open")   
-    except Exception as e:
-        print(f"An error occurred: {e}")
+def luagm_access():
+    execute_command("lusrmgr.msc", "Local Users and Groups management console opened successfully.")
 
-def winGodMod_access(): # Windows God Mode Control Panel
-    try:
-        os.system("explorer.exe shell:::{ED7BA470-8E54-465E-825C-99712043E01C}")          
-        print("Open God Mode")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+def winFeatures_access():
+    execute_command("optionalfeatures", "Windows features opened successfully.")
+
+def winGodMod_access():
+    execute_command("explorer.exe shell:::{ED7BA470-8E54-465E-825C-99712043E01C}", "God Mode opened successfully.")
 
 def startupFolder_access():
-    try:
-        os.system("explorer.exe shell:startup")
-        print("Open Startup folder")
-    except Exception as e:
-        print(f"An error occurred: {e}")             
-
-
+    execute_command("explorer.exe shell:startup", "Startup folder opened successfully.")
 
 
 

@@ -3,7 +3,7 @@ from ckUac import uacUservalue
 #BUILD VERSION
 major = 0
 minor = 64
-build = 38
+build = 39
 
 #AUTHOR
 author = "NoID1290"
