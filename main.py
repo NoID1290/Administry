@@ -9,7 +9,8 @@ from admtoolsW import btnSelect
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QVBoxLayout
+    QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
+    QDesktopWidget
 )
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
@@ -19,23 +20,60 @@ class WelcomeScreen(QWidget):
         super().__init__()
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setFixedSize(400, 300)
-        self.setStyleSheet("background-color: #2E2E2E; color: white;")
+        self.setStyleSheet("""
+            background-color: qlineargradient(
+                spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                stop:0 #3a3a3a, stop:1 #2E2E2E
+            );
+            color: white;
+            border-radius: 10px;
+        """)
+        
         layout = QVBoxLayout()
-
+        layout.setContentsMargins(20, 20, 20, 20)
+        
+        # Add title
         self.label = QLabel("Administry", self)
-        self.buildV = QLabel(buildVerCk.ver, self)
         self.label.setAlignment(Qt.AlignCenter)
-        self.buildV.setAlignment(Qt.AlignTop)
-        self.label.setStyleSheet("font-size: 24px;")
-        self.buildV.setStyleSheet("font-size: 14px;")
+        self.label.setStyleSheet("font-size: 26px; font-weight: bold; font-family: 'Helvetica';")
+        
+        # Drop shadow effect for title
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(10)
+        shadow.setColor(Qt.black)
+        shadow.setOffset(2, 2)
+        self.label.setGraphicsEffect(shadow)
+        
         layout.addWidget(self.label)
+        
+        # Add build version
+        self.buildV = QLabel(buildVerCk.ver, self)  # Replace with buildVerCk.ver
+        self.buildV.setAlignment(Qt.AlignBottom | Qt.AlignRight)
+        self.buildV.setStyleSheet("font-size: 14px; font-style: bold; color: #BBBBBB;")
+        
+        layout.addWidget(self.buildV)
+        
         self.setLayout(layout)
+        
+        # Center the welcome screen
+        self.center()
+
+    def center(self): #Center to monitor
+        screen = QDesktopWidget().availableGeometry().center()
+        fg = self.frameGeometry()
+        fg.moveCenter(screen)
+        self.move(fg.topLeft())
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(buildVerCk.finalTitle)
         self.setWindowIcon(QIcon(pathDir.adm_ico))
+        self.setGeometry(100, 100, 550, 380)
+        self.setFixedSize(self.size()) # Disable resize & maximize
+
+        # Center the main window
+        self.center()
 
         # Button setup
         mainBtn = [
@@ -80,6 +118,12 @@ class MainWindow(QMainWindow):
             toolbar.addAction(action)
         self.addToolBar(toolbar)
 
+    def center(self): #Center to monitor
+        screen = QDesktopWidget().availableGeometry().center()
+        fg = self.frameGeometry()
+        fg.moveCenter(screen)
+        self.move(fg.topLeft())
+
     # Define Qapp
     def admTools(self):
         self.admin_tools_window = btnSelect()
@@ -101,7 +145,6 @@ def main():
     
     # Create and show the main window
     main_window = MainWindow()
-    main_window.setGeometry(100, 100, 550, 380)
     main_window.show()
     
     # Close the welcome screen

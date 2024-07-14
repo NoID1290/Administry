@@ -1,4 +1,5 @@
 import pathDir
+import admtools
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar, QVBoxLayout, QDialog
@@ -18,13 +19,14 @@ class btnSelect(QWidget):
         self.setWindowTitle('Administration Tools')
         self.setGeometry(300, 300, 600, 300)
         self.setWindowIcon(QIcon(pathDir.adm_ico))
+        self.setFixedSize(self.size()) # Disable resize & maximize
 
 
         # Adm Button setup
         admBtn = [
-            ("LUAGM", None, (50, 50)),
-            ("Windows Features", None, (50, 120)),
-            ("Windows God Mode", None, (50, 190)),
+            ("LUAGM",admtools.luagm_access, (50, 50)),
+            ("Windows Features", admtools.winFeatures_access, (50, 120)),
+            ("Windows God Mode", admtools.winGodMod_access, (50, 190)),
             ("Refresh graphic driver", None, (300, 190)),
             ("Refresh audio driver", None, (300, 120)),
             ("Windows 10/11 switch menu context", None, (300, 50)),
