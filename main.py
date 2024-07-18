@@ -3,50 +3,19 @@ import svctaskk
 import buildVerCk
 import moduleBoot
 import pathDir
-import ckHardware
 from ckHardware import GPUname, get_cpu_info
 from admtoolsW import btnSelect
+from monitorSleep import CountdownDialog, force_monitor_sleep  # Importing CountdownDialog and force_monitor_sleep
+
+
 
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
-    QDesktopWidget, QProgressBar
+    QDesktopWidget
 )
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal
-
-class LoaderThread(QThread):
-    progress = pyqtSignal(int)
-    done = pyqtSignal()
-
-    def run(self):
-        tasks = [
-            self.task_1,
-            self.task_2,
-            self.task_3
-            # Add more tasks as needed
-        ]
-
-        for i, task in enumerate(tasks):
-            task()
-            self.progress.emit(int((i + 1) / len(tasks) * 100))
-
-        self.done.emit()
-
-    def task_1(self):
-        import time
-        time.sleep(0.2)  # Simulate a task taking time
-        # Add the actual task here
-
-    def task_2(self):
-        import time
-        time.sleep(0.1)  # Simulate a task taking time
-        # Add the actual task here
-
-    def task_3(self):
-        import time
-        time.sleep(1)  # Simulate a task taking time
-        # Add the actual task here
+from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
 
 class WelcomeScreen(QWidget):
     def __init__(self):
@@ -61,7 +30,7 @@ class WelcomeScreen(QWidget):
             color: white;
             border-radius: 10px;
         """)
-
+        
         layout = QVBoxLayout()
         layout.setContentsMargins(20, 20, 20, 20)
         
@@ -78,7 +47,7 @@ class WelcomeScreen(QWidget):
         self.label.setGraphicsEffect(shadow)
         
         layout.addWidget(self.label)
-
+        
         # Add build version
         self.buildV = QLabel(buildVerCk.ver, self) 
         self.buildV.setAlignment(Qt.AlignBottom | Qt.AlignRight)
@@ -86,58 +55,24 @@ class WelcomeScreen(QWidget):
         
         layout.addWidget(self.buildV)
         
-        # Add progress bar
-        self.progress = QProgressBar(self)
-        self.progress.setAlignment(Qt.AlignCenter)
-        self.progress.setStyleSheet("""
-            QProgressBar {
-                border: 2px solid grey;
-                border-radius: 5px;
-                text-align: center;
-                font-size: 16px;
-                font-family: 'Helvetica';
-                color: white;
-            }
-            QProgressBar::chunk {
-                background-color: #05B8CC;
-                width: 20px;
-            }
-        """)
-        self.progress.setValue(0)
-        
-        layout.addWidget(self.progress)
         self.setLayout(layout)
         
         # Center the welcome screen
         self.center()
-
-        # Start the loader thread
-        self.loader_thread = LoaderThread()
-        self.loader_thread.progress.connect(self.update_progress)
-        self.loader_thread.done.connect(self.on_loading_done)
-        self.loader_thread.start()
 
     def center(self): # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()
         fg = self.frameGeometry()
         fg.moveCenter(screen)
         self.move(fg.topLeft())
-    
-    def update_progress(self, value):
-        self.progress.setValue(value)
-
-    def on_loading_done(self):
-        self.main_window = MainWindow()
-        self.main_window.show()
-        self.close()
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle(buildVerCk.finalTitle)
-        self.setWindowIcon(QIcon(pathDir.adm_ico))
-        self.setGeometry(100, 100, 550, 380)
-        self.setFixedSize(self.size())  # Disable resize & maximize
+        self.setWindowTitle(buildVerCk.finalTitle) # Main Title 
+        self.setWindowIcon(QIcon(pathDir.adm_ico)) # Main Windows Ico
+        self.setGeometry(100, 100, 550, 380) # Main Windows Resolution
+        self.setFixedSize(self.size()) # Disable resize & maximize
 
         # Center the main window
         self.center()
@@ -145,20 +80,21 @@ class MainWindow(QMainWindow):
         # Button setup
         mainBtn = [
             ("Restart Windows GUI", svctaskk.WIN_GUI_KILL, (50, 50)),
-            ("Restart Steam", svctaskk.STEAM_VALVE_KILL, (50, 120)),
-            ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 190)),
+            ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 120)),
+            ("Force Monitor Sleep", None, (50, 190)),  # waiting for module completed | self.show_countdown_dialog
             ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
-            ("Cipher Password Generator", None, (300, 50)),  # waiting for module completed
+            ("Cipher Password Generator", None, (300, 50)), # waiting for module completed
             ("Administration Tools", self.admTools, (300, 120)),
             ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
             ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
         ]
 
-        for text, func, pos in mainBtn:
+        for text, func, pos in mainBtn: # All buttons functions
             btn = QPushButton(text, self)
-            btn.setGeometry(*pos, 200, 50)  # All buttons geometry
+            btn.setGeometry(*pos, 200, 40) # All buttons geometry
             btn.setEnabled(func is not None)
             if func:
+                
                 btn.clicked.connect(func)
 
         # Copyright bar
@@ -177,15 +113,15 @@ class MainWindow(QMainWindow):
         # Toolbar
         toolbar = QToolBar()
         toolbar.setMovable(False)
-        toolbar.setDisabled(True)  # Disable/Enable access to toolbar
+        toolbar.setDisabled(True) # Disable/Enable access to toolbar
         toolbar.setWindowTitle("Hide toolbar")
-        toolbar.setToolTip("Need Help?")  # Easter Egg
+        toolbar.setToolTip("Need Help?") # Easter Egg
 
-        for action in ["Options", "Help?", "About"]:
+        for action in ["Options", "Help?", "About"]: 
             toolbar.addAction(action)
         self.addToolBar(toolbar)
 
-    def center(self):  # Center to monitor
+    def center(self): # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()
         fg = self.frameGeometry()
         fg.moveCenter(screen)
@@ -196,12 +132,33 @@ class MainWindow(QMainWindow):
         self.admin_tools_window = btnSelect()
         self.admin_tools_window.show()
 
+    def show_countdown_dialog(self):
+        self.countdown_dialog = CountdownDialog()
+        self.countdown_dialog.exec_()  # Show the dialog modally
+        sys.exit(self.exec_()) # ?? it is work for breaking loop?   
+
 def main():
     app = QApplication(sys.argv)
 
     # Create and show the welcome screen
     welcome_screen = WelcomeScreen()
     welcome_screen.show()
+    
+    # Force the application to process all pending events (Loading)
+    app.processEvents()
+    
+    # Time Sleep
+    import time
+    time.sleep(2)
+    
+    # Create and show the main window
+    main_window = MainWindow()
+    main_window.show()
+    
+    # Close the welcome screen
+    welcome_screen.close()
+    
+    # Loop
 
     sys.exit(app.exec_())
 
