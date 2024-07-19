@@ -1,4 +1,4 @@
-import buildVerCk
+import ckbuildV
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
@@ -40,7 +40,7 @@ class WelcomeScreen(QWidget):
         layout.addWidget(self.label)
         
         # Add build version
-        self.buildV = QLabel(buildVerCk.ver, self) 
+        self.buildV = QLabel(ckbuildV.ver, self) 
         self.buildV.setAlignment(Qt.AlignBottom | Qt.AlignRight)
         self.buildV.setStyleSheet("font-size: 14px; font-style: bold; color: #BBBBBB;")
         

@@ -1,6 +1,6 @@
 import sys
 import svctaskk
-import buildVerCk
+import ckbuildV
 import moduleBoot
 import pathDir
 #import bootScreen
@@ -21,7 +21,7 @@ from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
 class main_Win0(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle(buildVerCk.finalTitle) # Main Title 
+        self.setWindowTitle(ckbuildV.finalTitle) # Main Title 
         self.setWindowIcon(QIcon(pathDir.adm_ico)) # Main Windows Ico
         self.setGeometry(100, 100, 550, 380) # Main Windows Resolution
         self.setFixedSize(self.size()) # Disable resize & maximize
@@ -53,7 +53,7 @@ class main_Win0(QMainWindow):
         copyright_widget = QWidget()
         copyright_widget_layout = QHBoxLayout()
         copyright_widget.setLayout(copyright_widget_layout)
-        copyright_widget_layout.addWidget(QLabel(buildVerCk.copyrighttext + buildVerCk.build + " " + GPUname))
+        copyright_widget_layout.addWidget(QLabel(ckbuildV.copyrighttext + ckbuildV.build + " " + GPUname))
 
         # Status bar
         status_bar = QStatusBar()

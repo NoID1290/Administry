@@ -27,7 +27,6 @@ def main():
     welcome_screen.close()
     
     # Loop
-
     sys.exit(app.exec_())
 
 if __name__ == "__main__":

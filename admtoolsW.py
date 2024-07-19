@@ -39,13 +39,6 @@ class btnSelect(QWidget):
             btn.setEnabled(func is not None)
             if func:
                 btn.clicked.connect(func)
-
-
-
-
-
-        
-
-
+                
         self.show
         
