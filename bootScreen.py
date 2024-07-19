@@ -1,17 +1,18 @@
 import ckbuildV
-
 from PyQt5.QtWidgets import (
-    QLabel, QWidget, QVBoxLayout, QGraphicsDropShadowEffect,
+    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
+    QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
     QDesktopWidget
 )
-
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
 
 
 class WelcomeScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.setFixedSize(400, 300) 
+        self.setFixedSize(400, 300)       
         layout = QVBoxLayout()
         layout.setContentsMargins(20, 20, 20, 20)
         
