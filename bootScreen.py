@@ -1,11 +1,10 @@
 import ckbuildV
+
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
+    QLabel, QWidget, QVBoxLayout, QGraphicsDropShadowEffect,
     QDesktopWidget
 )
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
+
 
 
 class WelcomeScreen(QWidget):
