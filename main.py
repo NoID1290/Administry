@@ -1,19 +1,8 @@
 import sys
 import bootScreen
 import mainWin
-from ckHardware import GPUname, get_cpu_info
-from admtoolsW import btnSelect
-from monitorSleep import CountdownDialog, force_monitor_sleep  # Importing CountdownDialog and force_monitor_sleep
+from PyQt5.QtWidgets import QApplication
 
-
-
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
-    QDesktopWidget
-)
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
  
 
 def main():
