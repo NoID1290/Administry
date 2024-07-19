@@ -11,16 +11,7 @@ class WelcomeScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.setFixedSize(400, 300)
-        self.setStyleSheet("""
-            background-color: qlineargradient(
-                spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                stop:0 #3a3a3a, stop:1 #2E2E2E
-            );
-            color: white;
-            border-radius: 10px;
-        """)
-        
+        self.setFixedSize(400, 300) 
         layout = QVBoxLayout()
         layout.setContentsMargins(20, 20, 20, 20)
         
