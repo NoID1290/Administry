@@ -1,11 +1,12 @@
+
 import ckbuildV
+import pathDir
+
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
-    QDesktopWidget
+    QApplication, QWidget, QVBoxLayout, QLabel, QGraphicsDropShadowEffect, QDesktopWidget
 )
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtCore import Qt
 
 
 class WelcomeScreen(QWidget):
@@ -16,34 +17,28 @@ class WelcomeScreen(QWidget):
         self.setStyleSheet("""
             background-color: qlineargradient(
                 spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                stop:0 #3a3a3a, stop:1 #2E2E2E
+                stop:0 #247BA0, stop:1 #FFFFB5
             );
             color: white;
             border-radius: 10px;
         """)
         
         layout = QVBoxLayout()
-        layout.setContentsMargins(20, 20, 20, 20)
         
-        # Add title
-        self.label = QLabel("Administry", self)
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setStyleSheet("font-size: 26px; font-weight: bold; font-family: 'Helvetica';")
-        
-        # Drop shadow effect for title
-        shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(10)
-        shadow.setColor(Qt.black)
-        shadow.setOffset(2, 2)
-        self.label.setGraphicsEffect(shadow)
-        
-        layout.addWidget(self.label)
+        # Load and set the PNG image
+        pixmap = QPixmap(pathDir.adm_img)  # Replace with the path to your image
+        self.image_label = QLabel(self)
+        self.image_label.setPixmap(pixmap)
+        self.image_label.setAlignment(Qt.AlignCenter)
         
         # Add build version
         self.buildV = QLabel(ckbuildV.ver, self) 
-        self.buildV.setAlignment(Qt.AlignBottom | Qt.AlignRight)
-        self.buildV.setStyleSheet("font-size: 14px; font-style: bold; color: #BBBBBB;")
+        self.buildV.setAlignment(Qt.AlignBottom | Qt.AlignCenter)
+        self.buildV.setStyleSheet("font-size: 18px; font-style: bold; color: #FFFFB5;")
         
+       
+        
+        layout.addWidget(self.image_label)
         layout.addWidget(self.buildV)
         
         self.setLayout(layout)
@@ -51,8 +46,11 @@ class WelcomeScreen(QWidget):
         # Center the welcome screen
         self.center()
 
+
     def center(self): # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()
         fg = self.frameGeometry()
         fg.moveCenter(screen)
         self.move(fg.topLeft())
+
+
