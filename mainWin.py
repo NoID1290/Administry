@@ -53,9 +53,7 @@ class main_Win0(QMainWindow):
         copyright_widget = QWidget()
         copyright_widget_layout = QHBoxLayout()
         copyright_widget.setLayout(copyright_widget_layout)
-        build = f"| {buildVerCk.major}{buildVerCk.minor}{buildVerCk.build}"
-        copyrighttext = f"| {buildVerCk.copyright}"
-        copyright_widget_layout.addWidget(QLabel(copyrighttext + build + " " + GPUname))
+        copyright_widget_layout.addWidget(QLabel(buildVerCk.copyrighttext + buildVerCk.build + " " + GPUname))
 
         # Status bar
         status_bar = QStatusBar()
