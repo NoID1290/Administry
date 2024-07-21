@@ -1,7 +1,6 @@
-import sys
 import pyaudio
 import wave
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QComboBox, QDialog
+from PyQt5.QtWidgets import QPushButton, QLabel, QComboBox, QDialog
 
 class RecorderWindow(QDialog):
     def __init__(self):

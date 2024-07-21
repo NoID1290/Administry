@@ -1,11 +1,9 @@
 import pathDir
 import admtools
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QVBoxLayout, QDialog
+    QPushButton, QWidget
 )
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
 
 
 

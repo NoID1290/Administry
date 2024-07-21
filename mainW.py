@@ -4,19 +4,17 @@ import ckbuildV
 import moduleBoot
 import pathDir
 #import bootScreen
-from ckHardware import GPUname, get_cpu_info
+from ckHardware import GPUname
 from admtoolsW import btnSelect
-from monitorSleep import CountdownDialog, force_monitor_sleep  # Importing CountdownDialog and force_monitor_sleep
+from monitorSleep import CountdownDialog  # Importing CountdownDialog and force_monitor_sleep
 
 
 
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QVBoxLayout, QGraphicsDropShadowEffect,
-    QDesktopWidget
+    QMainWindow, QPushButton, QHBoxLayout, QLabel,
+    QStatusBar, QWidget, QToolBar, QDesktopWidget
 )
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QTimer  # Importing Qt for alignment constants
 
 class main_Win0(QMainWindow):
     def __init__(self):
@@ -82,7 +80,7 @@ class main_Win0(QMainWindow):
         self.admin_tools_window = btnSelect()
         self.admin_tools_window.show()
 
-    def show_countdown_dialog(self):
-        self.countdown_dialog = CountdownDialog()
-        self.countdown_dialog.exec_()  # Show the dialog modally
+    def monitorSleep(self):
+        self.mS_CD = CountdownDialog()
+        self.mS_CD.exec_()  # Show the dialog modally
         sys.exit(self.exec_()) # ?? it is work for breaking loop?
