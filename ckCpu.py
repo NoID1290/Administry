@@ -34,6 +34,11 @@ CPU_Usage = cpu_info_data['CPU Usage (%)']
 L2_Cache_Size = cpu_info_data['CPU L2 Cache Size (KB)']
 L3_Cache_Size = cpu_info_data['CPU L3 Cache Size (KB)']
 
+# Format for specific values
+CPU_Frequency_fiV_0 = f"{CPU_Frequency} MHz"
+L2_Cache_Size_fiV_0 = f"{L2_Cache_Size} KB"
+L3_Cache_Size_fiV_0 = f"{L3_Cache_Size} KB"
+
 
 '''
 # Print the CPU information

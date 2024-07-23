@@ -1,6 +1,6 @@
 import sys
 import bootScreen
-import mainW
+import main_W
 import time
 from PyQt5.QtWidgets import QApplication
 
@@ -17,10 +17,10 @@ def main():
     app.processEvents()
     
     # Time Sleep
-    time.sleep(2)
+    time.sleep(0)
     
     # Create and show the main window
-    main_window = mainW.main_Win0()
+    main_window = main_W.main_Win0()
     main_window.show()
     
     # Close the welcome screen

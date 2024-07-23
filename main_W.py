@@ -4,9 +4,9 @@ import ckbuildV
 import moduleBoot
 import pathDir
 #import bootScreen
-from ckGpu import GPUname
-from admtoolsW import btnSelect
-from hwabt import App
+#from ckGpu import GPUname
+from admtools_W import btnSelect
+from hwabt_W import exec__hw0
 
 
 
@@ -51,7 +51,7 @@ class main_Win0(QMainWindow):
         copyright_widget = QWidget()
         copyright_widget_layout = QHBoxLayout()
         copyright_widget.setLayout(copyright_widget_layout)
-        copyright_widget_layout.addWidget(QLabel(ckbuildV.copyrighttext + ckbuildV.build + " " + GPUname))
+        copyright_widget_layout.addWidget(QLabel(ckbuildV.copyrighttext + ckbuildV.build))
 
         # Status bar
         status_bar = QStatusBar()
@@ -81,15 +81,4 @@ class main_Win0(QMainWindow):
         self.admin_tools_window.show()
  
     def showAboutPC(self):
-        self.hw_0 = App(QApplication.instance())
-
-''''
-def main():
-    app = QApplication(sys.argv)
-    main_window = main_Win0()
-    main_window.show()
-    sys.exit(app.exec_())
-
-if __name__ == "__main__":
-    main()
-'''
+        self.hw_0 = exec__hw0(QApplication.instance())

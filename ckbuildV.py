@@ -3,7 +3,7 @@ from ckUac import uacUservalue
 #BUILD VERSION
 major = 0
 minor = 67
-build = 50
+build = 51
 
 #AUTHOR
 author = "NoID1290"
@@ -17,3 +17,4 @@ copyrighttext = f"{copyright}"
 #TITLE
 maintitle = "Administry "  # added tab for title space
 finalTitle = maintitle + ver + uacUservalue
+

@@ -15,13 +15,23 @@ class WorkerThread(QThread):
         import time
         time.sleep(0)  # Simulate a delay | set to 0
 
-        from ckGpu import GPUname  # Import here to prevent hard loading
-        from ckCpu import CPU_Name  # Import here to prevent hard loading
+
+        # Import here to prevent hard loading
+        from ckGpu import GPUname  
+        from ckCpu import (CPU_Name, Arch, CPU_Frequency_fiV_0, 
+                           CPU_Core_Count, L2_Cache_Size_fiV_0, L3_Cache_Size_fiV_0)
+
 
         # Collect information
         info = {
             "GPU Name": GPUname,
             "CPU": CPU_Name,
+            "CPU Architecture": Arch,
+            "CPU Max Frequency": CPU_Frequency_fiV_0,
+            "CPU Core": CPU_Core_Count,
+            "CPU L2 Cache": L2_Cache_Size_fiV_0,
+            "CPU L3 Cache": L3_Cache_Size_fiV_0,
+
             # DEMO ONLY
             "GPU Temp": "70°C",
             "RAM": "16 GB",
@@ -84,7 +94,7 @@ class HwAbt(QMainWindow):
         scroll.setWidget(container)
 
 # Main application logic
-class App:
+class exec__hw0:
     def __init__(self, app):
         self.app = app
         self.loading_screen = LoadingScreen()
