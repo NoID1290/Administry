@@ -39,12 +39,6 @@ else:
     id_ = name = load = memory_total = memory_used = memory_free = temperature = uuid = None
 
 
-#CPU
-
-def get_cpu_info():
-    cpu_architecture = platform.machine()
-    processor_name = platform.processor()
-    return cpu_architecture, processor_name
 
   
 

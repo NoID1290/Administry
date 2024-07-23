@@ -4,15 +4,16 @@ import ckbuildV
 import moduleBoot
 import pathDir
 #import bootScreen
-from ckHardware import GPUname
+from ckGpu import GPUname
 from admtoolsW import btnSelect
-from monitorSleep import CountdownDialog  # Importing CountdownDialog and force_monitor_sleep
+from hwabt import App
+
 
 
 
 from PyQt5.QtWidgets import (
     QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QToolBar, QDesktopWidget
+    QStatusBar, QWidget, QToolBar, QDesktopWidget, QApplication
 )
 from PyQt5.QtGui import QIcon
 
@@ -31,7 +32,7 @@ class main_Win0(QMainWindow):
         mainBtn = [
             ("Restart Windows GUI", svctaskk.WIN_GUI_KILL, (50, 50)),
             ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 120)),
-            ("Force Monitor Sleep", None, (50, 190)),  # waiting for module completed | self.show_countdown_dialog
+            ("About PC", self.showAboutPC, (50, 190)),
             ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
             ("Cipher Password Generator", None, (300, 50)), # waiting for module completed
             ("Administration Tools", self.admTools, (300, 120)),
@@ -44,7 +45,6 @@ class main_Win0(QMainWindow):
             btn.setGeometry(*pos, 200, 40) # All buttons geometry
             btn.setEnabled(func is not None)
             if func:
-                
                 btn.clicked.connect(func)
 
         # Copyright bar
@@ -79,8 +79,17 @@ class main_Win0(QMainWindow):
     def admTools(self):
         self.admin_tools_window = btnSelect()
         self.admin_tools_window.show()
+ 
+    def showAboutPC(self):
+        self.hw_0 = App(QApplication.instance())
 
-    def monitorSleep(self):
-        self.mS_CD = CountdownDialog()
-        self.mS_CD.exec_()  # Show the dialog modally
-        sys.exit(self.exec_()) # ?? it is work for breaking loop?
+''''
+def main():
+    app = QApplication(sys.argv)
+    main_window = main_Win0()
+    main_window.show()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
+'''
