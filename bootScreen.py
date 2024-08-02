@@ -45,8 +45,6 @@ class WelcomeScreen(QWidget):
         
         # Center the welcome screen
         self.center()
-
-
     def center(self): # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()
         fg = self.frameGeometry()

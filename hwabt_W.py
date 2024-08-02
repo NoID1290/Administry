@@ -2,7 +2,7 @@
 import sys
 import pathDir
 import admtools
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QProgressBar, QMainWindow, QScrollArea
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QProgressBar, QMainWindow, QScrollArea, QDesktopWidget
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 
@@ -21,13 +21,12 @@ class WorkerThread(QThread):
         from ckCpu import (CPU_Name, Arch, CPU_Frequency_fiV_0, 
                            Physical_Cores, L2_Cache_Size_fiV_0, L3_Cache_Size_fiV_0)
         from ckOs import ckOS__finalV
-        from psutil import virtual_memory
+        from ckMb import mb_manufact0, mb_prod0
         
 
         # Collecting RAM
+        from psutil import virtual_memory
         memory_info = virtual_memory()
-
-           
         #Format
         ram_0 = (f"{memory_info.total / (1024 ** 3):.2f} GB")
 
@@ -38,12 +37,14 @@ class WorkerThread(QThread):
             "OS Release": ckOS__finalV,
             "GPU Name": GPUname,
             "CPU": CPU_Name,
-            "CPU Architecture": Arch,
+            #"CPU Architecture": Arch,
             "CPU Max Frequency": CPU_Frequency_fiV_0,
             "CPU Core(s)": Physical_Cores,
-            "CPU L2 Cache": L2_Cache_Size_fiV_0,
-            "CPU L3 Cache": L3_Cache_Size_fiV_0,
+            #"CPU L2 Cache": L2_Cache_Size_fiV_0, 
+            #"CPU L3 Cache": L3_Cache_Size_fiV_0,
             "RAM": ram_0,
+            "Motherboard Manufacturer": mb_manufact0,
+            "Motherboard Model": mb_prod0,
             
 
         }
@@ -70,6 +71,16 @@ class LoadingScreen(QWidget):
         layout.addWidget(self.progress)
 
         self.setLayout(layout)
+        
+        # Center the welcome screen
+        self.center()
+    def center(self): # Center to monitor
+        screen = QDesktopWidget().availableGeometry().center()
+        fg = self.frameGeometry()
+        fg.moveCenter(screen)
+        self.move(fg.topLeft())
+
+
 
 # Main window 
 class HwAbt(QMainWindow):
@@ -80,7 +91,7 @@ class HwAbt(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('Hardware Info')
-        self.setGeometry(100, 100, 600, 400)  # Increase window size
+        self.setGeometry(100, 100, 400, 300)  # Window size
         self.setWindowIcon(QIcon(pathDir.adm_ico))
 
         # Create a central widget with a scroll area
@@ -98,6 +109,15 @@ class HwAbt(QMainWindow):
             layout.addWidget(label)
 
         scroll.setWidget(container)
+
+                # Center the welcome screen
+        self.center()
+    def center(self): # Center to monitor
+        screen = QDesktopWidget().availableGeometry().center()
+        fg = self.frameGeometry()
+        fg.moveCenter(screen)
+        self.move(fg.topLeft())
+
 
 # Main application logic
 class exec__hw0:
