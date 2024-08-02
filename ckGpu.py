@@ -1,5 +1,5 @@
 import GPUtil
-import platform
+
 
 #GPU
 def get_gpu_info():
@@ -25,6 +25,7 @@ def get_gpu_info():
 
 gpu_info_list = get_gpu_info()
 
+# Extract individual values
 if gpu_info_list:
     first_gpu_info = gpu_info_list[0]  # Accessing information for the first GPU
     GPUid_ = first_gpu_info['id']

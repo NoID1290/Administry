@@ -6,46 +6,52 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QProgres
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 
-# Define a thread for long-running tasks
+# Thread for long-running tasks
 class WorkerThread(QThread):
     finished = pyqtSignal(dict)
 
     def run(self):
-        # Simulate a long task
+        # Simulate a long task if needed
         import time
         time.sleep(0)  # Simulate a delay | set to 0
 
 
-        # Import here to prevent hard loading
+        # Long-running task
         from ckGpu import GPUname  
         from ckCpu import (CPU_Name, Arch, CPU_Frequency_fiV_0, 
-                           CPU_Core_Count, L2_Cache_Size_fiV_0, L3_Cache_Size_fiV_0)
+                           Physical_Cores, L2_Cache_Size_fiV_0, L3_Cache_Size_fiV_0)
+        from ckOs import ckOS__finalV
+        from psutil import virtual_memory
+        
+
+        # Collecting RAM
+        memory_info = virtual_memory()
+
+           
+        #Format
+        ram_0 = (f"{memory_info.total / (1024 ** 3):.2f} GB")
 
 
-        # Collect information
+
+        # Collecting information from there and imports
         info = {
+            "OS Release": ckOS__finalV,
             "GPU Name": GPUname,
             "CPU": CPU_Name,
             "CPU Architecture": Arch,
             "CPU Max Frequency": CPU_Frequency_fiV_0,
-            "CPU Core": CPU_Core_Count,
+            "CPU Core(s)": Physical_Cores,
             "CPU L2 Cache": L2_Cache_Size_fiV_0,
             "CPU L3 Cache": L3_Cache_Size_fiV_0,
+            "RAM": ram_0,
+            
 
-            # DEMO ONLY
-            "GPU Temp": "70°C",
-            "RAM": "16 GB",
-            "OS": "Windows 10",
-            "Motherboard": "XYZ Model",
-            "Storage": "512 GB SSD",
-            "Network": "Ethernet",
-            "Battery": "85%",
         }
 
         # Emit a signal when the task is done
         self.finished.emit(info)
 
-# Create a loading screen
+# Loading screen
 class LoadingScreen(QWidget):
     def __init__(self):
         super().__init__()
@@ -65,7 +71,7 @@ class LoadingScreen(QWidget):
 
         self.setLayout(layout)
 
-# Main window that shows hardware information
+# Main window 
 class HwAbt(QMainWindow):
     def __init__(self, info):
         super().__init__()
