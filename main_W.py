@@ -8,9 +8,6 @@ import pathDir
 from admtools_W import btnSelect
 from hwabt_W import exec__hw0
 
-
-
-
 from PyQt5.QtWidgets import (
     QMainWindow, QPushButton, QHBoxLayout, QLabel,
     QStatusBar, QWidget, QToolBar, QDesktopWidget, QApplication
@@ -20,9 +17,9 @@ from PyQt5.QtGui import QIcon
 class main_Win0(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle(ckbuildV.finalTitle) # Main Title 
-        self.setWindowIcon(QIcon(pathDir.adm_ico)) # Main Windows Ico
-        self.setGeometry(100, 100, 550, 380) # Main Windows Resolution
+        self.setWindowTitle(ckbuildV.finalTitle) # Main Title
+        self.setWindowIcon(QIcon(pathDir.adm_ico)) # Main Window Icon
+        self.setGeometry(100, 100, 550, 380) # Main Window Resolution
         self.setFixedSize(self.size()) # Disable resize & maximize
 
         # Center the main window
@@ -34,7 +31,7 @@ class main_Win0(QMainWindow):
             ("Restart Elgato Stream Deck", svctaskk.ELGATO_STREAMDECK_KILL, (50, 120)),
             ("About PC", self.showAboutPC, (50, 190)),
             ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
-            ("Cipher Password Generator", None, (300, 50)), # waiting for module completed
+            ("Cipher Password Generator", None, (300, 50)), # waiting for module completion
             ("Administration Tools", self.admTools, (300, 120)),
             ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
             ("Restart HWINFO64", svctaskk.HWINFO64_KILL, (50, 260)),
@@ -75,10 +72,18 @@ class main_Win0(QMainWindow):
         fg.moveCenter(screen)
         self.move(fg.topLeft())
 
-    # Define Qapp
+    # Define admTools method
     def admTools(self):
         self.admin_tools_window = btnSelect()
         self.admin_tools_window.show()
- 
+
+    # Define showAboutPC method
     def showAboutPC(self):
         self.hw_0 = exec__hw0(QApplication.instance())
+
+# Application entry point
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    mainWin = main_Win0()
+    mainWin.show()
+    sys.exit(app.exec_())
