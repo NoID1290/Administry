@@ -10,21 +10,23 @@ CONFIG_FILE = "config.xml"
 class MainApp:
     def __init__(self):
         self.app = QApplication(sys.argv)
-        self.welcome_screen = bootScreen.WelcomeScreen()
-        self.welcome_screen.show()
-        
-        # Process all pending events
-        self.app.processEvents()
         
         # Load the configuration
-        self.loadConfig()
+        bootscreen = self.loadConfig()
+        
+        if bootscreen:
+            # Show the welcome screen if configured
+            self.welcome_screen = bootScreen.WelcomeScreen()
+            self.welcome_screen.show()
+            # Process all pending events
+            self.app.processEvents()
+            # Logo delay
+            time.sleep(2)
+            self.welcome_screen.close()
         
         # Create and show the main window
         self.main_window = main_W.main_Win0()
         self.main_window.show()
-        
-        # Close the welcome screen
-        self.welcome_screen.close()
         
         # Start the application loop
         sys.exit(self.app.exec_())
@@ -34,12 +36,10 @@ class MainApp:
             tree = ET.parse(CONFIG_FILE)
             root = tree.getroot()
             bootscreen = root.find('bootscreen').text == 'true'
-            if bootscreen:
-                time.sleep(3)
-            else:
-                time.sleep(0)
+            return bootscreen
         except (ET.ParseError, FileNotFoundError, AttributeError) as e:
             QMessageBox.warning(None, "Error", f"Error loading config: {e}")
+            return False
 
 if __name__ == "__main__":
     MainApp()
