@@ -110,7 +110,7 @@ class HwAbt(QMainWindow):
 
         scroll.setWidget(container)
 
-                # Center the welcome screen
+        # Center the welcome screen
         self.center()
     def center(self): # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()

@@ -2,8 +2,8 @@ from ckUac import uacUservalue
 
 #BUILD VERSION
 major = 0
-minor = 69
-build = 56
+minor = 70
+build = 57
 
 #AUTHOR
 author = "NoID1290"

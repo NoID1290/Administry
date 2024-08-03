@@ -19,10 +19,10 @@ class main_Win0(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle(ckbuildV.finalTitle) # Main Title
-        self.setWindowIcon(QIcon(pathDir.adm_ico)) # Main Window Icon
-        self.setGeometry(100, 100, 550, 380) # Main Window Resolution
-        self.setFixedSize(self.size()) # Disable resize & maximize
+        self.setWindowTitle(ckbuildV.finalTitle)  # Main Title
+        self.setWindowIcon(QIcon(pathDir.adm_ico))  # Main Window Icon
+        self.setGeometry(100, 100, 550, 380)  # Main Window Resolution
+        self.setFixedSize(self.size())  # Disable resize & maximize
 
         # Center the main window
         self.center()
@@ -33,15 +33,15 @@ class main_Win0(QMainWindow):
             ("Restart Elgato Stream Deck", ELGATO_STREAMDECK_KILL, (50, 120)),
             ("About PC", self.showAboutPC, (50, 190)),
             ("Video Converter", moduleBoot.runningVconverter, (300, 260)),
-            ("Cipher Password Generator", None, (300, 50)), # waiting for module completion
+            ("Cipher Password Generator", None, (300, 50)),  # waiting for module completion
             ("Administration Tools", self.admTools, (300, 120)),
             ("Audio Recording", moduleBoot.runningAudioR, (300, 190)),
             ("Restart HWINFO64", HWINFO64_KILL, (50, 260)),
         ]
 
-        for text, func, pos in mainBtn: # All buttons functions
+        for text, func, pos in mainBtn:  # All buttons functions
             btn = QPushButton(text, self)
-            btn.setGeometry(*pos, 200, 40) # All buttons geometry
+            btn.setGeometry(*pos, 200, 40)  # All buttons geometry
             btn.setEnabled(func is not None)
             if func:
                 btn.clicked.connect(func)
@@ -97,7 +97,7 @@ class main_Win0(QMainWindow):
     def runAction(self):
         print("Run action triggered")
 
-    def toggleBootscreen(self, state):
+    def toggleBootscreen(self):
         self.saveConfig()
         if self.enable_bootscreen_action.isChecked():
             print("Enable bootscreen checked")
@@ -109,20 +109,21 @@ class main_Win0(QMainWindow):
 
     def loadConfig(self):
         try:
-            tree = ET.parse(self.CONFIG_FILE)
-            root = tree.getroot()
-            bootscreen = root.find('bootscreen').text == 'true'
+            self.tree = ET.parse(self.CONFIG_FILE)
+            self.root = self.tree.getroot()
+            bootscreen = self.root.find('bootscreen').text == 'true'
             self.enable_bootscreen_action.setChecked(bootscreen)
         except (ET.ParseError, FileNotFoundError, AttributeError) as e:
             print("Error loading config:", e)
+            self.root = ET.Element("config")
+            self.tree = ET.ElementTree(self.root)
 
     def saveConfig(self):
-        root = ET.Element("config")
-        bootscreen = ET.SubElement(root, "bootscreen")
+        bootscreen = self.root.find('bootscreen')
+        if bootscreen is None:
+            bootscreen = ET.SubElement(self.root, "bootscreen")
         bootscreen.text = 'true' if self.enable_bootscreen_action.isChecked() else 'false'
-        
-        tree = ET.ElementTree(root)
-        tree.write(self.CONFIG_FILE, encoding='utf-8', xml_declaration=True)
+        self.tree.write(self.CONFIG_FILE, encoding='utf-8', xml_declaration=True)
 
     def admTools(self):
         self.admin_tools_window = btnSelect()
