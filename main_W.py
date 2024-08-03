@@ -8,7 +8,7 @@ from hwabt_W import exec__hw0
 
 from PyQt5.QtWidgets import (
     QMainWindow, QPushButton, QHBoxLayout, QLabel,
-    QStatusBar, QWidget, QDesktopWidget, QApplication, QAction, QMenuBar, QMenu
+    QStatusBar, QWidget, QDesktopWidget, QApplication, QAction, QMenuBar, QMenu, QMessageBox
 )
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
@@ -19,6 +19,10 @@ class main_Win0(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.initUI()
+        self.loadConfig()
+
+    def initUI(self):
         self.setWindowTitle(ckbuildV.finalTitle)  # Main Title
         self.setWindowIcon(QIcon(pathDir.adm_ico))  # Main Window Icon
         self.setGeometry(100, 100, 550, 380)  # Main Window Resolution
@@ -76,17 +80,15 @@ class main_Win0(QMainWindow):
         file_menu.addAction(exit_action)
 
         # Adding actions to the Options menu
-        self.enable_bootscreen_action = QAction("Enable bootscreen", self, checkable=True)
-        self.enable_bootscreen_action.triggered.connect(self.toggleBootscreen)
+        self.toogle_bootscreen_action = QAction("Enable bootscreen", self, checkable=True)
+        self.toogle_bootscreen_action.triggered.connect(self.saveConfig)
 
         option2_action = QAction("Option 2", self)
+        option2_action.setEnabled(False) # Waiting for module to me completed
         option2_action.triggered.connect(self.option2Action)
 
-        options_menu.addAction(self.enable_bootscreen_action)
+        options_menu.addAction(self.toogle_bootscreen_action)
         options_menu.addAction(option2_action)
-
-        # Load config
-        self.loadConfig()
 
     def center(self):  # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()
@@ -97,13 +99,6 @@ class main_Win0(QMainWindow):
     def runAction(self):
         print("Run action triggered")
 
-    def toggleBootscreen(self):
-        self.saveConfig()
-        if self.enable_bootscreen_action.isChecked():
-            print("Enable bootscreen checked")
-        else:
-            print("Enable bootscreen unchecked")
-
     def option2Action(self):
         print("Option 2 action triggered")
 
@@ -112,9 +107,9 @@ class main_Win0(QMainWindow):
             self.tree = ET.parse(self.CONFIG_FILE)
             self.root = self.tree.getroot()
             bootscreen = self.root.find('bootscreen').text == 'true'
-            self.enable_bootscreen_action.setChecked(bootscreen)
+            self.toogle_bootscreen_action.setChecked(bootscreen)
         except (ET.ParseError, FileNotFoundError, AttributeError) as e:
-            print("Error loading config:", e)
+            QMessageBox.warning(self, "Error", f"Error loading config: {e}")
             self.root = ET.Element("config")
             self.tree = ET.ElementTree(self.root)
 
@@ -122,7 +117,7 @@ class main_Win0(QMainWindow):
         bootscreen = self.root.find('bootscreen')
         if bootscreen is None:
             bootscreen = ET.SubElement(self.root, "bootscreen")
-        bootscreen.text = 'true' if self.enable_bootscreen_action.isChecked() else 'false'
+        bootscreen.text = 'true' if self.toogle_bootscreen_action.isChecked() else 'false'
         self.tree.write(self.CONFIG_FILE, encoding='utf-8', xml_declaration=True)
 
     def admTools(self):
