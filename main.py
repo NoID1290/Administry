@@ -17,7 +17,7 @@ def main():
     app.processEvents()
     
     # Time Sleep
-    time.sleep(0) 
+    time.sleep(0)
     
     # Create and show the main window
     main_window = main_W.main_Win0()
