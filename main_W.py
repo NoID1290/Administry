@@ -19,8 +19,10 @@ class main_Win0(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.tree, self.root = self.load_config()
         self.initUI()
-        self.loadConfig()
+        self.load_bootscreen_cfg()
+        self.load_runAsAdmin_cfg()
 
     def initUI(self):
         self.setWindowTitle(ckbuildV.finalTitle)  # Main Title
@@ -71,7 +73,6 @@ class main_Win0(QMainWindow):
 
         # Adding actions to the File menu
         run_action = QAction("Run", self)
-        run_action.triggered.connect(self.runAction)
 
         exit_action = QAction("Exit", self)
         exit_action.triggered.connect(self.close)
@@ -81,14 +82,14 @@ class main_Win0(QMainWindow):
 
         # Adding actions to the Options menu
         self.toogle_bootscreen_action = QAction("Enable bootscreen", self, checkable=True)
-        self.toogle_bootscreen_action.triggered.connect(self.saveConfig)
+        self.toogle_bootscreen_action.triggered.connect(self.save_bootscreen_cfg)
 
-        option2_action = QAction("Option 2", self)
-        option2_action.setEnabled(False) # Waiting for module to me completed
-        option2_action.triggered.connect(self.option2Action)
+        self.adm_run_mkButton = QAction("Always run as administrator", self, checkable=True)
+        self.adm_run_mkButton.setEnabled(True)  # Waiting for module to be completed
+        self.adm_run_mkButton.triggered.connect(self.save_runAsAdmin_cfg)
 
         options_menu.addAction(self.toogle_bootscreen_action)
-        options_menu.addAction(option2_action)
+        options_menu.addAction(self.adm_run_mkButton)
 
     def center(self):  # Center to monitor
         screen = QDesktopWidget().availableGeometry().center()
@@ -96,28 +97,39 @@ class main_Win0(QMainWindow):
         fg.moveCenter(screen)
         self.move(fg.topLeft())
 
-    def runAction(self):
-        print("Run action triggered")
-
-    def option2Action(self):
-        print("Option 2 action triggered")
-
-    def loadConfig(self):
+    def load_config(self):
         try:
-            self.tree = ET.parse(self.CONFIG_FILE)
-            self.root = self.tree.getroot()
-            bootscreen = self.root.find('bootscreen').text == 'true'
-            self.toogle_bootscreen_action.setChecked(bootscreen)
+            tree = ET.parse(self.CONFIG_FILE)
+            root = tree.getroot()
+            return tree, root
         except (ET.ParseError, FileNotFoundError, AttributeError) as e:
             QMessageBox.warning(self, "Error", f"Error loading config: {e}")
-            self.root = ET.Element("config")
-            self.tree = ET.ElementTree(self.root)
+            root = ET.Element("config")
+            tree = ET.ElementTree(root)
+            return tree, root
 
-    def saveConfig(self):
+    def load_bootscreen_cfg(self):
+        bootscreen = self.root.find('bootscreen')
+        if bootscreen is not None:
+            self.toogle_bootscreen_action.setChecked(bootscreen.text == 'true')
+
+    def save_bootscreen_cfg(self):
         bootscreen = self.root.find('bootscreen')
         if bootscreen is None:
             bootscreen = ET.SubElement(self.root, "bootscreen")
         bootscreen.text = 'true' if self.toogle_bootscreen_action.isChecked() else 'false'
+        self.tree.write(self.CONFIG_FILE, encoding='utf-8', xml_declaration=True)
+
+    def load_runAsAdmin_cfg(self):
+        runasadmin = self.root.find('runAsAdmin')
+        if runasadmin is not None:
+            self.adm_run_mkButton.setChecked(runasadmin.text == 'true')
+
+    def save_runAsAdmin_cfg(self):
+        runasadmin = self.root.find('runAsAdmin')
+        if runasadmin is None:
+            runasadmin = ET.SubElement(self.root, "runAsAdmin")
+        runasadmin.text = 'true' if self.adm_run_mkButton.isChecked() else 'false'
         self.tree.write(self.CONFIG_FILE, encoding='utf-8', xml_declaration=True)
 
     def admTools(self):
