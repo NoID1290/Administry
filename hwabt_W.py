@@ -1,8 +1,8 @@
 import sys
 import pathDir
 import admtools
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QProgressBar, QMainWindow, QScrollArea, QDesktopWidget, QFrame
-from PyQt5.QtGui import QIcon, QFont, QColor, QPalette
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QProgressBar, QMainWindow, QScrollArea, QDesktopWidget, QFrame
+from PyQt5.QtGui import QIcon, QFont, QColor, QPalette, QPixmap
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 
 # Thread for long-running tasks
@@ -73,7 +73,7 @@ class HwAbt(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('Hardware Info')
-        self.setGeometry(100, 100, 500, 400)  # Window size
+        self.setGeometry(100, 100, 700, 500)  # Window size
         self.setWindowIcon(QIcon(pathDir.adm_ico))
 
         scroll = QScrollArea(self)
@@ -81,7 +81,15 @@ class HwAbt(QMainWindow):
         self.setCentralWidget(scroll)
 
         container = QWidget()
-        layout = QVBoxLayout(container)
+        main_layout = QHBoxLayout(container)
+
+        # Left container for categories
+        left_container = QWidget()
+        left_layout = QVBoxLayout(left_container)
+
+        # Right container for details (if needed)
+        right_container = QWidget()
+        right_layout = QVBoxLayout(right_container)
 
         font = QFont("Segoe UI", 10)
         header_font = QFont("Segoe UI", 12, QFont.Bold)
@@ -102,18 +110,27 @@ class HwAbt(QMainWindow):
             category_label.setFont(header_font)
             category_label.setAlignment(Qt.AlignLeft)
             category_label.setPalette(palette)
-            layout.addWidget(category_label)
-            layout.addWidget(self.create_separator())
+            left_layout.addWidget(category_label)
+            left_layout.addWidget(self.create_separator())
 
             for key in keys:
                 if key in self.info:
                     label = QLabel(f"{key}: {self.info[key]}", self)
                     label.setFont(font)
                     label.setAlignment(Qt.AlignLeft)
-                    layout.addWidget(label)
+                    left_layout.addWidget(label)
 
-            layout.addWidget(self.create_separator())
+            left_layout.addWidget(self.create_separator())
 
+        # Add the image to the right container
+        image_label = QLabel(self)
+        pixmap = QPixmap(pathDir.adm_img)
+        image_label.setPixmap(pixmap)
+        image_label.setAlignment(Qt.AlignCenter)
+        right_layout.addWidget(image_label)
+
+        main_layout.addWidget(left_container)
+        main_layout.addWidget(right_container)
         scroll.setWidget(container)
         self.center()
 
