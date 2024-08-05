@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
+
 import bootScreen
 import main_W
 
@@ -47,8 +48,8 @@ class MainApp:
     def load_config_run_as_admin(self):
         """Load runAsAdmin configuration from the XML file."""
         return self.load_config('runAsAdmin')
-
-    def load_config(self, tag):
+        
+    def load_config(self, tag):                 
         """Generic method to load configuration from the XML file."""
         try:
             tree = ET.parse(CONFIG_FILE)
