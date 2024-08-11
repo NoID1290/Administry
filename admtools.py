@@ -1,8 +1,10 @@
 import os
 import pathDir
+import subprocess
 from PyQt5.QtWidgets import QPushButton, QWidget
 from PyQt5.QtGui import QIcon
 from functools import partial
+
 
 def exeXc(command, success_message):
     try:
@@ -31,7 +33,9 @@ def enable_win11_Mcontext():  # Enable Windows 11 Menu Context
 
 def disable_win11_Mcontext():  # Disable Windows 11 Menu Context to the old Windows 10 version
         command = r'reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve'
-        exeXc(command, "Windows 11 Menu Context disabled successfully.")    
+        exeXc(command, "Windows 11 Menu Context disabled successfully.")  
+        subprocess.run("taskkill /f /im explorer.exe", shell=True)
+        subprocess.run("start explorer.exe", shell=True)  
 
 
 

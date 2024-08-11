@@ -28,8 +28,8 @@ class btnSelect(QWidget):
             ("Windows God Mode", admtools.winGodMod_access, (50, 190)),
             ("Startup Folder", admtools.startupFolder_access, (50, 260)),
             ("Windows 10 Menu Context",admtools.disable_win11_Mcontext, (300, 50)),
-            ("Windows 11 Menu Context", admtools.enable_win11_Mcontext, (300, 190)),
-            ("Refresh audio driver", None, (300, 120)),
+            ("Windows 11 Menu Context", admtools.enable_win11_Mcontext, (300, 120)),
+            ("Refresh audio driver", None, (300, 190)),
             
         ]
         
