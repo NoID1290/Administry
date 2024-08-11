@@ -2,5 +2,6 @@
 <config>
     <bootscreen>false</bootscreen>
     <runAsAdmin>false</runAsAdmin>
+    <firstLaunch>true</firstLaunch>
     
 </config>

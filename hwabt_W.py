@@ -162,10 +162,10 @@ class exec__hw0:
         self.loading_screen.close()
         self.hw_info = HwAbt(info)
         self.hw_info.show()
-
+    
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyle("Fusion")
+    #app.setStyle("Fusion") # Change the loading bar style
 
     # Custom palette for the application
     palette = QPalette()

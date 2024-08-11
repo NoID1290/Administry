@@ -1,5 +1,8 @@
 from audioRecorder import RecorderWindow
 from ffconverter import vConverterApp
+import sys
+from PyQt5.QtWidgets import QApplication
+
 
 # FFConverter instance
 def runningVconverter():
@@ -15,3 +18,6 @@ def runningAudioR():
     recorder = RecorderWindow()
     recorder.exec_()
     print("Audio recorder closed by user")
+
+
+

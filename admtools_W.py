@@ -7,6 +7,7 @@ from PyQt5.QtGui import QIcon
 
 
 
+
     
 class btnSelect(QWidget):
     def __init__(self):
@@ -26,9 +27,10 @@ class btnSelect(QWidget):
             ("Windows Features", admtools.winFeatures_access, (50, 120)),
             ("Windows God Mode", admtools.winGodMod_access, (50, 190)),
             ("Startup Folder", admtools.startupFolder_access, (50, 260)),
-            ("Refresh graphic driver", None, (300, 190)),
+            ("Windows 10 Menu Context",admtools.disable_win11_Mcontext, (300, 50)),
+            ("Windows 11 Menu Context", admtools.enable_win11_Mcontext, (300, 190)),
             ("Refresh audio driver", None, (300, 120)),
-            ("Windows 10/11 switch menu context", None, (300, 50)),
+            
         ]
         
         for text, func, pos in admBtn:
