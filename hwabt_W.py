@@ -16,9 +16,9 @@ class WorkerThread(QThread):
                            Physical_Cores)
         from ckOs import ckOS__finalV
         from ckMb import mb_manufact0, mb_prod0
-        from ckRam import ram_capacity0, ram_manufacturer0, ram_speed0
+        from ckRam import ram_capacity0, ram_manufacturer0, ram_speed0, ram_bank_label0
 
-        info = {
+        info = { # (__***) is not show in the final value
             # OS
             "OS Release": ckOS__finalV,
             
@@ -26,18 +26,20 @@ class WorkerThread(QThread):
             "GPU Name": GPUname,
             
             # CPU
-            "CPU Name": CPU_Name,
-            "CPU Max Frequency": CPU_Frequency_fiV_0,
-            "CPU Core(s)": Physical_Cores,
+            "__cpu Name": CPU_Name,
+            "__cpu Max Frequency": CPU_Frequency_fiV_0,
+            "__cpu Core(s)": Physical_Cores,
             
-            # RAM
-            "RAM Size": ram_capacity0,
-            "RAM Speed": ram_speed0,
-            "RAM Manufacturer": ram_manufacturer0,
+            # Memory
+            #"__mem Size Capacity"
+            "__mem Size by slot": ram_capacity0,
+            "__mem Speed": ram_speed0,
+            "__mem Type" : ram_bank_label0,  
+            "__mem Manufacturer": ram_manufacturer0,
             
             # Motherboard
-            "Motherboard Manufacturer": mb_manufact0,
-            "Motherboard Model": mb_prod0,
+            "__mb Manufacturer": mb_manufact0,
+            "__mb Model": mb_prod0,
         }
 
         self.finished.emit(info)
@@ -100,9 +102,9 @@ class HwAbt(QMainWindow):
         categories = {
             "Operating System": ["OS Release"],
             "Graphics": ["GPU Name"],
-            "Processor": ["CPU Name", "CPU Max Frequency", "CPU Core(s)"],
-            "Memory": ["RAM Size", "RAM Speed", "RAM Manufacturer"],
-            "Motherboard": ["MB Manufacturer", "MB Model"]
+            "Processor": ["__cpu Name", "__cpu Max Frequency", "__cpu Core(s)"],
+            "Memory": ["__mem Size by slot", "__mem Speed", "__mem Type", "__mem Manufacturer"],
+            "Motherboard": ["__mb Manufacturer", "__mb Model"]
         }
 
         for category, keys in categories.items():
@@ -115,8 +117,8 @@ class HwAbt(QMainWindow):
 
             for key in keys:
                 if key in self.info:
-                    # Remove prefix for display
-                    display_key = key.replace("CPU ", "").replace("RAM ", "").replace("MB ", "")
+                    # Remove prefix (__***) for display
+                    display_key = key.replace("__cpu ", "").replace("__mem ", "").replace("__mb", "")
                     label = QLabel(f"{display_key}: {self.info[key]}", self)
                     label.setFont(font)
                     label.setAlignment(Qt.AlignLeft)
