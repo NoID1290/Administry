@@ -1,43 +1,47 @@
 import sys
 import pathDir
-import admtools
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QProgressBar, QMainWindow, QScrollArea, QDesktopWidget, QFrame
 from PyQt5.QtGui import QIcon, QFont, QColor, QPalette, QPixmap
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 
-# Thread for long-running tasks
 class WorkerThread(QThread):
     finished = pyqtSignal(dict)
 
     def run(self):
         import time
-        time.sleep(0)  # Simulate a delay | set to 0
+        time.sleep(0)  # Simulate a delay
 
-        # Long-running task
         from ckGpu import GPUname
-        from ckCpu import (CPU_Name, Arch, CPU_Frequency_fiV_0,
-                           Physical_Cores, L2_Cache_Size_fiV_0, L3_Cache_Size_fiV_0)
+        from ckCpu import (CPU_Name, CPU_Frequency_fiV_0,
+                           Physical_Cores)
         from ckOs import ckOS__finalV
         from ckMb import mb_manufact0, mb_prod0
-
-        from psutil import virtual_memory
-        memory_info = virtual_memory()
-        ram_0 = (f"{memory_info.total / (1024 ** 3):.2f} GB")
+        from ckRam import ram_capacity0, ram_manufacturer0, ram_speed0
 
         info = {
+            # OS
             "OS Release": ckOS__finalV,
+            
+            # GPU
             "GPU Name": GPUname,
-            "CPU": CPU_Name,
+            
+            # CPU
+            "CPU Name": CPU_Name,
             "CPU Max Frequency": CPU_Frequency_fiV_0,
             "CPU Core(s)": Physical_Cores,
-            "RAM": ram_0,
+            
+            # RAM
+            "RAM Size": ram_capacity0,
+            "RAM Speed": ram_speed0,
+            "RAM Manufacturer": ram_manufacturer0,
+            
+            # Motherboard
             "Motherboard Manufacturer": mb_manufact0,
             "Motherboard Model": mb_prod0,
         }
 
         self.finished.emit(info)
 
-# Loading screen
 class LoadingScreen(QWidget):
     def __init__(self):
         super().__init__()
@@ -64,7 +68,6 @@ class LoadingScreen(QWidget):
         fg.moveCenter(screen)
         self.move(fg.topLeft())
 
-# Main window
 class HwAbt(QMainWindow):
     def __init__(self, info):
         super().__init__()
@@ -73,7 +76,7 @@ class HwAbt(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('Hardware Info')
-        self.setGeometry(100, 100, 700, 500)  # Window size
+        self.setGeometry(100, 100, 700, 500)
         self.setWindowIcon(QIcon(pathDir.adm_ico))
 
         scroll = QScrollArea(self)
@@ -83,11 +86,8 @@ class HwAbt(QMainWindow):
         container = QWidget()
         main_layout = QHBoxLayout(container)
 
-        # Left container for categories
         left_container = QWidget()
         left_layout = QVBoxLayout(left_container)
-
-        # Right container for details (if needed)
         right_container = QWidget()
         right_layout = QVBoxLayout(right_container)
 
@@ -100,9 +100,9 @@ class HwAbt(QMainWindow):
         categories = {
             "Operating System": ["OS Release"],
             "Graphics": ["GPU Name"],
-            "Processor": ["CPU", "CPU Max Frequency", "CPU Core(s)"],
-            "Memory": ["RAM"],
-            "Motherboard": ["Motherboard Manufacturer", "Motherboard Model"]
+            "Processor": ["CPU Name", "CPU Max Frequency", "CPU Core(s)"],
+            "Memory": ["RAM Size", "RAM Speed", "RAM Manufacturer"],
+            "Motherboard": ["MB Manufacturer", "MB Model"]
         }
 
         for category, keys in categories.items():
@@ -115,14 +115,16 @@ class HwAbt(QMainWindow):
 
             for key in keys:
                 if key in self.info:
-                    label = QLabel(f"{key}: {self.info[key]}", self)
+                    # Remove prefix for display
+                    display_key = key.replace("CPU ", "").replace("RAM ", "").replace("MB ", "")
+                    label = QLabel(f"{display_key}: {self.info[key]}", self)
                     label.setFont(font)
                     label.setAlignment(Qt.AlignLeft)
                     left_layout.addWidget(label)
 
             left_layout.addWidget(self.create_separator())
 
-        # Add the image to the right container
+
         image_label = QLabel(self)
         pixmap = QPixmap(pathDir.adm_img)
         image_label.setPixmap(pixmap)
@@ -147,7 +149,6 @@ class HwAbt(QMainWindow):
         line.setStyleSheet("color: #BDC3C7;")
         return line
 
-# Main application logic
 class exec__hw0:
     def __init__(self, app):
         self.app = app
@@ -162,12 +163,10 @@ class exec__hw0:
         self.loading_screen.close()
         self.hw_info = HwAbt(info)
         self.hw_info.show()
-    
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    #app.setStyle("Fusion") # Change the loading bar style
 
-    # Custom palette for the application
     palette = QPalette()
     palette.setColor(QPalette.Window, QColor("#ECF0F1"))
     palette.setColor(QPalette.WindowText, QColor("#2C3E50"))
