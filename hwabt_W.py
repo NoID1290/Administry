@@ -17,6 +17,7 @@ class WorkerThread(QThread):
         from ckOs import ckOS__finalV
         from ckMb import mb_manufact0, mb_prod0
         from ckRam import ram_capacity0, ram_manufacturer0, ram_speed0, ram_bank_label0
+        from ckHiberboot import hb_value0
 
         info = { # (__***) is not show in the final value
             # OS
@@ -40,6 +41,7 @@ class WorkerThread(QThread):
             # Motherboard
             "__mb Manufacturer": mb_manufact0,
             "__mb Model": mb_prod0,
+            "__mb Fast Boot": hb_value0,
         }
 
         self.finished.emit(info)
@@ -104,7 +106,7 @@ class HwAbt(QMainWindow):
             "Graphics": ["GPU Name"],
             "Processor": ["__cpu Name", "__cpu Max Frequency", "__cpu Core(s)"],
             "Memory": ["__mem Size by slot", "__mem Speed", "__mem Type", "__mem Manufacturer"],
-            "Motherboard": ["__mb Manufacturer", "__mb Model"]
+            "Motherboard": ["__mb Manufacturer", "__mb Model", "__mb Fast Boot"]
         }
 
         for category, keys in categories.items():
