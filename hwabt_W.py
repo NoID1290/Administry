@@ -80,7 +80,7 @@ class HwAbt(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('Hardware Info')
-        self.setGeometry(100, 100, 700, 500)
+        self.setGeometry(100, 100, 700, 600)
         self.setWindowIcon(QIcon(pathDir.adm_ico))
 
         scroll = QScrollArea(self)
