@@ -23,6 +23,8 @@ def is_fast_boot_enabled():
 status = is_fast_boot_enabled()
 if status is not None:
     if status:
-        hb_value0 = ("Enabled")
+        hb_value0 = ("Enable")
     else:
-        hb_value0 = ("Disabled")
+        hb_value0 = ("Disable")
+else:
+    hb_value0 = ("Not available on this system.")        
