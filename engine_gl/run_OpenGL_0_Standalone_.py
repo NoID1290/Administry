@@ -57,14 +57,12 @@ void main() {
 }
 """
 
-# Resolution
+# Options
 
-x_W = 1280
-y_W = 720
-
-#FPS
-
-fps_cap = 300
+x_W = 1920
+y_W = 1080
+fps_cap = 120
+speed = 1.0 # lower mean faster
 
 # Initialize Pygame and OpenGL
 pygame.init()
@@ -131,7 +129,7 @@ while running:
 
     # Update uniforms
     glUniform2f(iResolution, x_W, y_W)
-    glUniform1f(iTime, pygame.time.get_ticks() / 1000.0)
+    glUniform1f(iTime, pygame.time.get_ticks() / (speed * 1000) )
 
     glClear(GL_COLOR_BUFFER_BIT)
     glDrawElements(GL_TRIANGLES, len(indices), GL_UNSIGNED_INT, None)
