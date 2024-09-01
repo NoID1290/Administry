@@ -57,10 +57,19 @@ void main() {
 }
 """
 
+# Resolution
+
+x_W = 1280
+y_W = 720
+
+#FPS
+
+fps_cap = 300
+
 # Initialize Pygame and OpenGL
 pygame.init()
-screen = pygame.display.set_mode((800, 600), DOUBLEBUF | OPENGL)
-glViewport(0, 0, 800, 600)
+screen = pygame.display.set_mode((x_W, y_W), DOUBLEBUF | OPENGL)
+glViewport(0, 0, x_W, y_W)
 
 # Compile Shaders
 shader = compileProgram(
@@ -121,13 +130,13 @@ while running:
             running = False
 
     # Update uniforms
-    glUniform2f(iResolution, 800, 600)
+    glUniform2f(iResolution, x_W, y_W)
     glUniform1f(iTime, pygame.time.get_ticks() / 1000.0)
 
     glClear(GL_COLOR_BUFFER_BIT)
     glDrawElements(GL_TRIANGLES, len(indices), GL_UNSIGNED_INT, None)
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(fps_cap)
 
 # Cleanup
 glDeleteBuffers(1, [vbo])

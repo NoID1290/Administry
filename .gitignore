@@ -16,3 +16,5 @@ main.spec
 .gitignore
 modules/bin/standalone/ffmpeg.exe
 ___Dev.py
+multiprocessing_enhanced_fig.png
+fig.png
